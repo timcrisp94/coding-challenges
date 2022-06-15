@@ -24,8 +24,15 @@ function squareSum(numbers) {
 console.log(squareSum([1, 2, 2]))
 
 // reduce method
-function squareSumTwo(numbers) {
+function squareSumReduce(numbers) {
   return numbers.reduce(function(sum, n) {
     return (n*n) + sum
   }, 0)
 }
+
+function squareSumReduceArrow(numbers) {
+  return numbers.reduce((sum, num) => sum + (num * num), 0)
+}
+
+console.log(squareSumReduce([1, 2, 2]))
+console.log(squareSumReduceArrow([1, 2, 2]))
