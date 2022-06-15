@@ -22,3 +22,10 @@ function squareSum(numbers) {
 }
 
 console.log(squareSum([1, 2, 2]))
+
+// reduce method
+function squareSumTwo(numbers) {
+  return numbers.reduce(function(sum, n) {
+    return (n*n) + sum
+  }, 0)
+}
