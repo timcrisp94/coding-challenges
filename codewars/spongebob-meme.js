@@ -1,3 +1,4 @@
+
 /*
 https://www.codewars.com/kata/5982619d2671576e90000017/train/javascript
 
@@ -12,3 +13,28 @@ Test.assertEquals(spongeMeme("colored teens cant Be successful in tech"), 'CoLoR
 
 
 */
+
+function spongeMeme(sentence) { 
+  let array = sentence.toLowerCase().split('')
+  let newArray = []
+  for (let i = 0; i < array.length; i++) {
+    if (i % 2 === 0) {
+      newArray.push(array[i].toUpperCase())
+    } else {
+      newArray.push(array[i])
+    }
+  }
+  return newArray.join('')
+}
+
+// map solution
+
+function spongeMemeMap(sentence) {
+  return sentence
+  .split('')
+  .map((letter, i) => i % 2 ? letter.toLowerCase() : letter.toUpperCase())
+  .join('')
+}
+
+console.log(spongeMeme('colored teens cant Be successful in tech'))
+console.log(spongeMemeMap('colored teens cant Be successful in tech'))

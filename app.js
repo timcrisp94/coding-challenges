@@ -15,17 +15,10 @@ Test.assertEquals(spongeMeme("colored teens cant Be successful in tech"), 'CoLoR
 
 */
 
-function spongeMeme(sentence) { 
-  let array = sentence.toLowerCase().split('')
-  let newArray = []
-  for (let i = 0; i < array.length; i++) {
-    if (i % 2 === 0) {
-      newArray.push(array[i].toUpperCase())
-    } else {
-      newArray.push(array[i])
-    }
-  }
-  return newArray.join('')
-}
 
-console.log(spongeMeme('colored teens cant Be successful in tech'))
+// function spongeMeme(sentence) {
+//   return sentence.split('').map((v,i) => i % 2 ? v.toLowerCase(): v.toUpperCase()).join('');
+//   } 
+
+
+
