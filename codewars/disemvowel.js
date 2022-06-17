@@ -24,3 +24,26 @@ function disemvowel(str) {
   }  
   return newString  
 }
+
+/*
+
+regex solution
+
+function disemvowel(str) {
+  return str.replace(/[aeiou]/gi, '')
+}
+
+filter method
+
+function disemvowel(str) {
+  const vowels = 'aeiou'
+
+  return str
+  .split('')
+  .filter(letter => !vowels.includes(letter.toLowerCase()))
+  .join('')
+}
+
+console.log(disemvowel("N ffns bt,\nYur wrtng s mng th wrst \'v vr rad"))
+
+*/
