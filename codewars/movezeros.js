@@ -17,13 +17,7 @@ function moveZeros(arr) {
       newArr.push(arr[i])
     }
   }
-
-  // for (el of zeros) {
-  //   newArr.push(el)
-  // }
-
   return newArr.concat(zeros)
-  
 }
 
 /*
