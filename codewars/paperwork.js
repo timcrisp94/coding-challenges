@@ -13,3 +13,14 @@ function paperwork(n, m) {
 }
 
 console.log(paperwork(0, 2))
+
+/*
+
+function paperwork(n, m) {
+  return n > 0 && m > 0 ? n * m : 0
+}
+
+
+console.log(paperwork(0, 5))
+
+*/
