@@ -27,3 +27,10 @@ function bmi(weight, height) {
 }
 
 console.log(bmi(300, 50))
+
+// ternary solution
+
+const bmIndex = (w, h, bmIndex = w/h/h) => bmIndex <= 18.5 ? "Underweight" :
+bmIndex <= 25 ? "Normal" :
+bmIndex <= 30 ? "Overweight" : "Obese"
+
