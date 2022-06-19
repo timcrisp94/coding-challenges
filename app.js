@@ -8,19 +8,6 @@ Note: input will never be an empty string
 
 */
 
-function fakeBin(x) {
-  const array = x.split('')
-  let result = []
 
-  for (let digit of array) {
-    if (parseInt(digit) < 5) {
-      result.push(0)
-    } else if (parseInt(digit) >= 5) {
-      result.push(1)
-    }
-  }
-
-  return result.join('')
-}
 
 console.log(fakeBin('156'))
