@@ -1,7 +1,3 @@
 /*
 
 */
-
-
-
-console.log(accum('string'))
