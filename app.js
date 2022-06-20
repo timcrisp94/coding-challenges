@@ -7,16 +7,3 @@ filter_list([1,2,'aasf','1','123',123]) == [1,2,123]
 */
 
 
-function filter_list(l) {
-  const nums = []
-
-  for (let i = 0; i < l.length; i++) {
-    if (typeof(l[i]) === 'number') {
-      nums.push(l[i])
-    }
-  }
-
-  return nums
-}
-
-console.log(filter_list([1,2,'a','b']))
