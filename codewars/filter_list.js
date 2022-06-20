@@ -26,9 +26,8 @@ console.log(filter_list([1,2,'a','b']))
 filter method
 
 function filter_list(l) {
-  const nums = l.filter(element => typeof(element) === 'number')
+  return l.filter(element => typeof(element) === 'number')
 
-  return nums
 }
 
 console.log(filter_list([1,2,'a','b']))
