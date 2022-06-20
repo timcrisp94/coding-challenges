@@ -8,23 +8,13 @@ Write a function that accepts an integer n and a string s as parameters, and ret
 */
 
 function repeatStr(n, s) {
-  let str = ''
+  const result = []
+
   for (let i = 0; i < n; i++) {
-    str += s
+    result.push(s)
   }
-  return str
+
+  return result.join('')
 }
 
 console.log(repeatStr(5, "Hello"))
-
-/*
-
-function repeatStr(n, s) {
-  return s.repeat(n)
-}
-
-*/
-
-const chorus = 'Start me up'
-
-console.log(chorus.repeat(5))
