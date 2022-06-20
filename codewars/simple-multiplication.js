@@ -15,3 +15,11 @@ function simpleMultiplication(number) {
 }
 
 console.log(simpleMultiplication(3))
+
+/*
+
+function simpleMultiplication(number) {
+  return number * (number % 2 ? 9 : 8)
+}
+
+*/

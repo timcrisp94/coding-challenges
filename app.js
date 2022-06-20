@@ -1,13 +1,22 @@
 /*
+In this kata you will create a function that takes a list of non-negative integers and strings and returns a new list with the strings filtered out.
 
-This kata is about multiplying a given number by eight if it is an even number and by nine otherwise.
-
+filter_list([1,2,'a','b']) == [1,2]
+filter_list([1,'a','b',0,15]) == [1,0,15]
+filter_list([1,2,'aasf','1','123',123]) == [1,2,123]
 */
 
 
+function filter_list(l) {
+  const nums = []
 
-function simpleMultiplication(number) {
-  return number * (number % 2 ? 9 : 8)
+  for (let i = 0; i < l.length; i++) {
+    if (typeof(l[i]) === 'number') {
+      nums.push(l[i])
+    }
+  }
+
+  return nums
 }
 
-console.log(simpleMultiplication(3))
+console.log(filter_list([1,2,'a','b']))
