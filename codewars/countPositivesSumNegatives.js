@@ -1,3 +1,4 @@
+
 /*
 
 Given an array of integers.
@@ -27,12 +28,27 @@ function countPositivesSumNegatives(input) {
     } else {
       sum = sum + element
     }
+  } 
+  return [count, sum]
+}
+
+function countPositivesSumNegativesTern(input) {
+  const solution = []
+  let count = 0
+  let sum = 0
+
+  if (input === null || input.length === 0) {
+     return []
+  }
+
+  for (element of input) {
+     element > 0 ? count++ : sum += element
   }
 
   return [count, sum]
 }
 
-console.log(countPositivesSumNegatives([0, 2, 3, 0, 5, 6, 7, 8, 9, 10, -11, -12, -13, -14]))
+console.log(countPositivesSumNegatives([0, 2, 3, 0, 5, 6, 7, 8, 9, 10, -11, -12, -13, -14]) + ' ; ' + countPositivesSumNegativesTern([0, 2, 3, 0, 5, 6, 7, 8, 9, 10, -11, -12, -13, -14]))
 
 /*
 

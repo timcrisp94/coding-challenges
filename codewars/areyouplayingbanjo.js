@@ -19,4 +19,10 @@ function areYouPlayingBanjo(name) {
   }
 }
 
+function areYouPlayingBanjoTern(name) {
+  const arr = name.toLowerCase().split('')
+
+  return arr[0] === 'r' ? `${name} plays banjo` : `${name} does not play banjo`
+}
+
 console.log(areYouPlayingBanjo('Dan'))
