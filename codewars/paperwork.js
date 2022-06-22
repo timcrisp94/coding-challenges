@@ -12,7 +12,11 @@ function paperwork(n, m) {
   return n * m
 }
 
-console.log(paperwork(0, 2))
+function paperTern(n, m) {
+  return n < 0 || m < 0 ? 0 : n * m
+}
+
+console.log(paperwork(5, 2) + ' ; ' + paperTern(5, 2))
 
 /*
 

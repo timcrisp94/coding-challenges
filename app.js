@@ -1,14 +1,13 @@
-function simpleMultiplication(number) {
-   if (number % 2 === 0) {
-     return number * 8
-   } else {
-     return number * 9
-   }
- }
+function paperwork(n, m) {
+   if (n < 0 || m < 0) {
+     return 0
+   } 
  
- 
-function simplifyTern(n) {
-   return n % 2 === 0 ? n * 8 : n * 9
+   return n * m
 }
-   
-console.log(simpleMultiplication(3) + ' ; ' + simplifyTern(3))
+
+function paperTern(n, m) {
+   return n < 0 || m < 0 ? 0 : n * m
+}
+
+console.log(paperwork(5, 2) + ' ; ' + paperTern(5, 2))
