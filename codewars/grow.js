@@ -7,13 +7,13 @@ Given a non-empty array of integers, return the result of multiplying the values
 */
 
 function grow(x) {
-   let sum = 1
+  let sum = 1
 
-   for (let num of x) {
-      sum *= num
-   }
+  for (let num of x) {
+     sum *= num
+  }
 
-   return sum
+  return sum
 }
 
-console.log(grow([10, 2, 3, 4]))
+console.log(grow([1, 2, 3, 4]))
