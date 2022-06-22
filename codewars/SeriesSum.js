@@ -19,21 +19,21 @@ Examples:(Input --> Output)
 */
 
 function SeriesSum(n) {
-   let sum = 0  
-   
-   if (n === 1) {
-      return n
-   } 
+  let sum = 0  
+  
+  if (n === 1) {
+     return n
+  } 
 
-   if (n === 2) {
-      return 1.25
-   }
+  if (n === 2) {
+     return 1.25
+  }
 
-   for (let i = 0; i < n; i++) {
-      sum += 1 / (3 * i + 1)
-   }
+  for (let i = 0; i < n; i++) {
+     sum += 1 / (3 * i + 1)
+  }
 
-   return sum.toFixed(2)
+  return sum.toFixed(2)
 }
 
 
