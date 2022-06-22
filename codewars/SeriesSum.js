@@ -37,4 +37,9 @@ function SeriesSum(n) {
 }
 
 
+// const SeriesSum = (n, acc = 0) => {
+//   if (n === 0) return acc.toFixed(2)
+//   else return SeriesSum(n - 1, acc + 1/(3 * n - 2))
+// }
+
 console.log(SeriesSum(5))
