@@ -9,8 +9,16 @@ The goal of this exercise is to convert a string to a new string where each char
 
 */
 
+function duplicateEncode(word) {
+  word = word.toLowerCase()
 
-function duplicateEncode(word){
+  return word.replace(/./g, m => word.indexOf(m) === word.lastIndexOf(m) ? '(' : ')')
+}
+
+/*
+map function
+
+function duplicateEncode(word) {
   return word
   .toLowerCase()
   .split('')
@@ -19,5 +27,22 @@ function duplicateEncode(word){
   })
   .join('')
 }
+
+
+for of / ternary
+
+function duplicateEncode(word){
+  const unique = ''
+  word = word.toLowerCase()
+
+  for (let char of word) {
+    word.lastIndexOf(char) === word.indexOf(char) ? 
+    unique += '(' : unique += ")"
+  }
+
+  return unique
+}
+
+*/
 
 console.log(duplicateEncode('recede'))
