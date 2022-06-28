@@ -1,59 +1,97 @@
 /*
-Roman numerals are represented by seven different symbols: I, V, X, L, C, D and M.
+Convert a non-negative integer num to its English words representation.
 
-Symbol       Value
-I             1
-V             5
-X             10
-L             50
-C             100
-D             500
-M             1000
-For example, 2 is written as II in Roman numeral, just two one's added together. 12 is written as XII, which is simply X + II. The number 27 is written as XXVII, which is XX + V + II.
-
-Roman numerals are usually written largest to smallest from left to right. However, the numeral for four is not IIII. Instead, the number four is written as IV. Because the one is before the five we subtract it making four. The same principle applies to the number nine, which is written as IX. There are six instances where subtraction is used:
-
-I can be placed before V (5) and X (10) to make 4 and 9. 
-X can be placed before L (50) and C (100) to make 40 and 90. 
-C can be placed before D (500) and M (1000) to make 400 and 900.
-Given an integer, convert it to a roman numeral.
 */
 
+const lvl1 = "Zero One Two Three Four Five Six Sever Eight Nine Ten Eleven Twelve Thirteen Fourteen Fifteen Sixteen Seventeen Eighteen Nineteen".split(" ")
+const lvl2 = "Twenty Thirty Forty Fifty Sixty Seventy Eighty Ninety".split(" ")
+const lvl3 = "Hundred"
+const lvl4 = "Thousand Million Billion".split(" ")
 
-var intToRoman = function(num) {
-  let result = ''
-  const symbols = {
-    M:  1000,
-    CM: 900,
-    D:  500,
-    CD: 400,
-    C:  100,
-    XC: 90,
-    L:  50,
-    XL: 40,
-    X:  10,
-    IX: 9,
-    V:  5,
-    IV: 4,
-    I:  1,
-  };
+
+
+var numberToWords = function(num) {
+  let cur = num
+  let result = []
 
   if (num === 0) {
-    return ''
+    return "Zero"
   }
 
-  for (let prop in symbols) {
-    result += prop.repeat(Math.floor(num / symbols[prop]))
-    num %= symbols[prop]
+  while (cur > 0) {
+    let n = cur % 1000
+    cur = Math.floor(cur / 1000)
+    let words = []
+
+    if (n > 99) {
+      words.push(lvl1[Math.floor(n / 100)])
+      words.push(lvl3)
+      n %= 100
+    }
+
+    if (n > 19) {
+      words.push(lvl2[Math.floor(n / 10) - 2])
+      n %= 10
+    }
+
+    if (n > 0) {
+      words.push(lvl1[n])
+    }
+
+    if (words.length > 0) {
+      result.push(words.join(' '))
+    }
   }
 
-  return result
-};
+  if (result.length > 0) {
+    result = result.reverse()
+    return result.join(' ')
+  }
+}
 
-console.log(intToRoman(316))
-
+console.log(numberToWords(456))
 
 /*
 
+var numberToWords = function(num) {
+  let cur = num
+  let result = []
+  
+  while (cur > 0) {
+    let n = cur % 1000
+    console.log(`line 19 n = ${n}`)
+    cur = Math.floor(cur / 1000)
+    console.log(`cur line 21 ${cur}`)
+    let words = []
+    if (n > 99) {
+      words.push(lvl1[Math.floor(n/100)])
+      words.push(lvl3)
+      n %= 100
+      console.log(`line 26 words = ${words}`)
+      console.log(`line 26 n = ${n}`)
+    }
+    if(n>19) {
+      words.push(lvl2[Math.floor(n/10)- 2])
+      n %= 10
+      console.log(`line 26 words = ${words}`)
+      console.log(`line 31 n = ${n}`)
+    }
+    if (n > 0) {
+      words.push(lvl1[n])
+      console.log(`line 37 words = ${words}`) 
+    }
+    
+    if(words.length > 0) {
+      result.push(words.join(' '))
+    }
+  }
+
+  if (result.length > 0) {
+    result = result.reverse()
+    return result.join(' ')
+  }
+
+  return "Zero"
+}
 
 */
