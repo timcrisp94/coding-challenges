@@ -10,12 +10,11 @@ Return true if the array contains the value, false if not.
 
 
 function check(a, x) {
-  for (let i = 0; i < a.length; i++) {
-    if (a[i] === x) {
+  for (one of a) {
+    if (one === x) {
       return true
-    } 
+    }
   }
-
   return false
 }
 
