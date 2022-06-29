@@ -1,34 +1,35 @@
 /*
-Given a string, return true if the string is a palindrome, false if not
+given an integer, return an integer that is the reverse ordering of the number
 */
 
-function palindrome(str) {
-   return str.split('').every((char, i) => {
-      return char === str[str.length - i - 1]
-   })
-   
+function reverseInt(n) {
+   const string = n.toString().split('').reverse().join('')   
+   return parseInt(string) * Math.sign(n)   
 }
 
-console.log(palindrome('apple'))
-console.log(palindrome('racecar'))
+console.log(reverseInt(15))
+console.log(reverseInt(981))
+console.log(reverseInt(-12))
+console.log(reverseInt(0))
 
 /*
 
-/ two solutions using manually reversed str
+/ first solution
 
-function palindrome(str) {
-   if (str === str.split('').reverse().join('')) {
-      return true
+function reverseInt(n) {
+   const string = n.toString().split('').reverse().join('')
+   
+   if (n === 0) {
+      return 0
    }
-   return false
+
+   if (Math.sign(n) === -1) {
+      return parseInt(string) * -1
+   } else {
+      return parseInt(string)
+   }  
+   
 }
 
-function palindrome(str) {
-   const reverse = str.split('').reverse().join('')
-   if (str === reverse) {
-      return true
-   }
-   return false
-}
 
 */
