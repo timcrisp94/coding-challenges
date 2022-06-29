@@ -19,8 +19,6 @@ function repeatStr(n, s) {
 
 console.log(repeatStr(5, "Hello"))
 
-
-
 /*
 
 function repeatStr(n, s) {
