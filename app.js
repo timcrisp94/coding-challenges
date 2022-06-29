@@ -1,12 +1,13 @@
 /*
-Given a string, return a new string with the reversed order of characters
+Given a string, return true if the string is a palindrome, false if not
 */
 
-function reverse(str) {
-   return str.split('').reverse().join('')
+function palidrome(str) {
+   str === str.split('').reverse().join('') ? true : false
 }
 
-console.log(reverse('apple'))
+console.log(palindrome('apple'))
+console.log(palindrome('racecar'))
 /*
 
 */
