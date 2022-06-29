@@ -1,45 +1,28 @@
 /*
-given a string, return the character that is used most in the string
-
-COMMON STRING QUESTIONS:
-   -most common char
-   -anagram
-   -repeated characters
-
-string > object (keys= char, value= number of times)
-
-**
-const string = "Hello There!"
-const charMap = {}
-
-for (let char of string) {
-   charMap[char] = charMap[char] + 1 || 1  
-}
-**
+write a program that console logs the numbers from 1 to n
+-for multiples of three print fizz
+-for multiples of five print buzz
+-for multiples of three and five print fizzbuzz
 
 */
 
-function maxChar(str) {
-   const charMap = {}
-   let max = 0
-   let maxChar = ''
-
-   for (let char of str) {
-      charMap[char] = charMap[char] + 1 || 1
-   }
-
-   for (let char in charMap) {
-      if (charMap[char] > max) {
-         max = charMap[char]
-         maxChar = char
+function fizzbuzz(n) {
+   for (let i = 1; i <= n; i++) {
+      if (i % 3 === 0 && i % 5 === 0) {
+         console.log('fizzbuzz')
+      } else if (i % 5 === 0) {
+         console.log('buzz')
+      } else if (i % 3 === 0) {
+         console.log('fizz')
+      } else {
+         console.log(i)
       }
    }
-
-   return maxChar
 }
 
-console.log(maxChar('apple'))
-console.log(maxChar('abbbcccc'))
+console.log(fizzbuzz(15))
+
+
 
 
 /*
