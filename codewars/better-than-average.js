@@ -20,12 +20,25 @@ function betterThanAverage(classPoints, yourPoints) {
 
 
 
-
-
 console.log(betterThanAverage([2, 3], 5))
 console.log(betterThanAverage([5, 5], 4))
 
 /*
+
+/ helper function
+function betterThanAverage(classPoints, yourPoints) {
+  return average(classPoints) < yourPoints
+  
+}
+
+function average(array) {
+  let addedScores = 0
+  for (let num of array) {
+    addedScores += num
+  }
+  return addedScores/array.length
+}
+
 
 
 */
