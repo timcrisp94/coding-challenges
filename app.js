@@ -7,6 +7,21 @@ check to see if two provided strings are anagrams of each other (same characters
 
 
 function anagrams(stringA, stringB) {
+  return cleanString(stringA) === cleanString(stringB)
+}
+
+function cleanString(str) {
+  return str.replace(/[^\w]/g, '').toLowerCase().split('').sort().join('')
+}
+
+
+
+console.log(anagrams('fetch', 'reset'))
+console.log(anagrams('dormitory', 'dirty room'))
+
+/*
+
+function anagrams(stringA, stringB) {
   const aCharMap = buildCharMap(stringA)
   const bCharMap = buildCharMap(stringB)
   
@@ -31,7 +46,4 @@ function buildCharMap (str) {
   }
   return charMap
 }
-
-console.log(anagrams('fetch', 'reset'))
-console.log(anagrams('dormitory', 'dirty room'))
-
+*/
