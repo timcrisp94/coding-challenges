@@ -1,49 +1,37 @@
 /*
 
-check to see if two provided strings are anagrams of each other (same characters, same quantity)
--lowercase letters, filter out spaces
+There was a test in your class and you passed it. Congratulations!
+But you're an ambitious person. You want to know if you're better than the average student in your class.
+
+You receive an array with your peers' test scores. Now calculate the average and compare your score!
+
+Return True if you're better, else False!
+
+Note:
+Your points are not included in the array of your class's points. For calculating the average point you may add your point to the given array!
 
 */
 
-
-function anagrams(stringA, stringB) {
-  return cleanString(stringA) === cleanString(stringB)
+function betterThanAverage(classPoints, yourPoints) {
+  return average(classPoints) < yourPoints
+  
 }
 
-function cleanString(str) {
-  return str.replace(/[^\w]/g, '').toLowerCase().split('').sort().join('')
+function average(array) {
+  let addedScores = 0
+  for (let num of array) {
+    addedScores += num
+  }
+  return addedScores/array.length
 }
 
 
 
-console.log(anagrams('fetch', 'reset'))
-console.log(anagrams('dormitory', 'dirty room'))
+console.log(average([3, 3]))
+console.log(betterThanAverage([2, 3], 5))
+console.log(betterThanAverage([5, 5], 4))
 
 /*
 
-function anagrams(stringA, stringB) {
-  const aCharMap = buildCharMap(stringA)
-  const bCharMap = buildCharMap(stringB)
-  
-  if (Object.keys(aCharMap).length !== Object.keys(bCharMap).length) {
-    return false
-  }
 
-  for (let char in aCharMap) {
-    if (aCharMap[char] !== bCharMap[char]) {
-      return false
-    }
-  }
-
-  return true
-}
-
-function buildCharMap (str) {
-  const charMap = {}
-
-  for (let char of str.replace(/[^\w]/g, '').toLowerCase()) {
-    charMap[char] = charMap[char] + 1 || 1
-  }
-  return charMap
-}
 */
