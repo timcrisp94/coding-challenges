@@ -1,34 +1,37 @@
 /*
 
-Given an array of integers, find the one that appears an odd number of times.
-
-There will always be only one integer that appears an odd number of times.
-
-Examples
-[7] should return 7, because it occurs 1 time (which is odd).
-[0] should return 0, because it occurs 1 time (which is odd).
-[1,1,2] should return 2, because it occurs 1 time (which is odd).
-[0,1,0,1,0] should return 0, because it occurs 3 times (which is odd).
-[1,2,2,3,3,3,4,3,3,3,2,2,1] should return 4, because it appears 1 time (which is odd).
+check to see if two provided strings are anagrams of each other (same characters, same quantity)
+-lowercase letters, filter out spaces
 
 */
 
-function findOdd(A) {
-  const numMap = {}
 
-  for (let num of A) {
-    numMap[num] = numMap[num] + 1 || 1
+function anagrams(stringA, stringB) {
+  const aCharMap = buildCharMap(stringA)
+  const bCharMap = buildCharMap(stringB)
+  
+  if (Object.keys(aCharMap).length !== Object.keys(bCharMap).length) {
+    return false
   }
 
-  for (let num in numMap) {
-    if (numMap[num] % 2 !== 0) {
-      return parseInt(num)
+  for (let char in aCharMap) {
+    if (aCharMap[char] !== bCharMap[char]) {
+      return false
     }
   }
-  
+
+  return true
 }
 
-// const findOdd = (xs) => xs.reduce((a, b) => a ^ b);
+function buildCharMap (str) {
+  const charMap = {}
 
-// console.log(findOdd([1, 2, 2]))
+  for (let char of str.replace(/[^\w]/g, '').toLowerCase()) {
+    charMap[char] = charMap[char] + 1 || 1
+  }
+  return charMap
+}
+
+console.log(anagrams('fetch', 'reset'))
+console.log(anagrams('dormitory', 'dirty room'))
 
