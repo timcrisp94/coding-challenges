@@ -1,31 +1,25 @@
 /*
 
-There was a test in your class and you passed it. Congratulations!
-But you're an ambitious person. You want to know if you're better than the average student in your class.
+Create a function with two arguments that will return an array of the first (n) multiples of (x).
 
-You receive an array with your peers' test scores. Now calculate the average and compare your score!
+Assume both the given number and the number of times to count will be positive numbers greater than 0.
 
-Return True if you're better, else False!
-
-Note:
-Your points are not included in the array of your class's points. For calculating the average point you may add your point to the given array!
+Return the results as an array
 
 */
-
-function betterThanAverage(classPoints, yourPoints) {
-  return yourPoints > classPoints.reduce((a, b) => a + b, 0) / classPoints.length
+function countBy(x, n) {
+  let z = []
   
+  for (let i = 1; i <= n; i++) {
+    z.push(x * i)
+  }
+
+  return z
 }
 
+console.log(countBy(2, 5))
 
-
-
-
-
-console.log(betterThanAverage([2, 3], 5))
-console.log(betterThanAverage([5, 5], 4))
-
-/*
+/*169220804
 
 
 */
