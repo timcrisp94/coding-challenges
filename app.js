@@ -4,61 +4,76 @@ Write a function that accepts a positive integer n. The function should console 
 
 
 
-function steps(n) {
+function pyramid(n) {
+  const midpoint = Math.floor((2 * n - 1) / 2)
+  
   for (let row = 0; row < n; row++) {
-    let stair = ''
+    let level = ''
 
-    for (let column = 0; column < n; column++) {
-      column <= row ? stair += '#' : stair += ' '
+    for (let column = 0; column < 2 * n - 1; column++) {
+      if (midpoint - row <= column && midpoint + row >= column) {
+        level += '#'
+      } else {
+        level += ' '
+      }
     }
-    console.log(stair)
+    console.log(level)
   }
 }
 
-(steps(3))
+pyramid(3)
 
 /*
 / iterative solution
 
-/ from 0 to n
-  / create an empty string 'stair'
-  / from 0 to n
-    / if current column is equal to or less than the current row
-      / add a '#' to 'stair'
-    else 
-      / add a space to 'stair'
-    console.log 'stair'
+/ from 0 to n (iterate through rows)
+  / create an empty string 'level'
+  / from 0 to ?? (columns) --> n * 2 -1
+    / if the column should have a '#' --> column midpoint : Math.floor(n * 2 - 1 / 2) +/- by row
+      / add a '#' to 'level'
+    / else
+      / add a space to level
+  console.log 'stair'
 
-function (steps(n)) {
+function pyramid(n) {
+  const midpoint = Math.floor((2 * n - 1) / 2)
+  
   for (let row = 0; row < n; row++) {
-    let stair = ''
+    let level = ''
 
-    for (let column = 0; column < n; column++) {
-      if (column <= row) {
-        stair += '#'
+    for (let column = 0; column < 2 * n - 1; column++) {
+      if (midpoint - row <= column && midpoint + row >= column) {
+        level += '#'
       } else {
-        stair += ' '
+        level += ' '
       }
     }
-    console.log(stair)
+    console.log(level)
   }
 }
 
-
 / recursive solution
-function steps(n, row = 0, stair = '') {
-  if (n === row) {
+
+
+function pyramid(n, row = 0, level = '') {
+  if (row === n) {
     return
   }
 
-  if (n === stair.length) {
-    console.log(stair)
-    return steps(n, row + 1)
+  if (level.length === 2 * n - 1) {
+    console.log(level)
+    return pyramid(n, row + 1)
   }
 
-  const add = stair.length <= row ? '#' : ' '
-  steps(n, row, stair + add)
-
+  const midpoint = Math.floor((2 * n - 1) / 2)
+  let add;
+  if (midpoint - row <= level.length && midpoint + row >= level.length) {
+    add = '#'
+  } else {
+    add = ' '
+  }
+  
+  pyramid(n, row, level + add)
 }
 
 */
