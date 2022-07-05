@@ -1,40 +1,79 @@
 /*
-You probably know the "like" system from Facebook and other pages. People can "like" blog posts, pictures or other items. We want to create the text that should be displayed next to such an item.
-
-Implement the function which takes an array containing the names of people that like an item. It must return the display text as shown in the examples:
+Write a function that accepts a positive integer n. The function should console log a step shape with N levels using the # character. Make sure the step has spaces onf the right hand side.
 */
-function likes(names) {
-  return {
-    0: 'no one likes this',
-    1: `${names[0]} likes this`, 
-    2: `${names[0]} and ${names[1]} like this`, 
-    3: `${names[0]}, ${names[1]} and ${names[2]} like this`, 
-    4: `${names[0]}, ${names[1]} and ${names.length - 2} others like this`, 
-  }[Math.min(4, names.length)]
+
+
+
+function pyramid(n) {
+  const midpoint = Math.floor((2 * n - 1) / 2)
   
+  for (let row = 0; row < n; row++) {
+    let level = ''
+
+    for (let column = 0; column < 2 * n - 1; column++) {
+      if (midpoint - row <= column && midpoint + row >= column) {
+        level += '#'
+      } else {
+        level += ' '
+      }
+    }
+    console.log(level)
+  }
 }
 
-console.log(likes(["Alex", "Jacob", "Mark", "Max"]))
+pyramid(3)
 
 /*
+/ iterative solution
 
-function likes(names) {
-  if (names.length === 0) {
-    return "no one likes this"
-  } 
-  if (names.length === 1) {
-    return `${names[0]} likes this`
-  } 
-  if (names.length === 2) {
-    return `${names[0]} and ${names[1]} like this`
+/ from 0 to n (iterate through rows)
+  / create an empty string 'level'
+  / from 0 to ?? (columns) --> n * 2 -1
+    / if the column should have a '#' --> column midpoint : Math.floor(n * 2 - 1 / 2) +/- by row
+      / add a '#' to 'level'
+    / else
+      / add a space to level
+  console.log 'stair'
+
+function pyramid(n) {
+  const midpoint = Math.floor((2 * n - 1) / 2)
+  
+  for (let row = 0; row < n; row++) {
+    let level = ''
+
+    for (let column = 0; column < 2 * n - 1; column++) {
+      if (midpoint - row <= column && midpoint + row >= column) {
+        level += '#'
+      } else {
+        level += ' '
+      }
+    }
+    console.log(level)
   }
-  if (names.length === 3) {
-    return `${names[0]}, ${names[1]} and ${names[2]} like this`
+}
+
+/ recursive solution
+
+
+function pyramid(n, row = 0, level = '') {
+  if (row === n) {
+    return
   }
 
-  return `${names[0]}, ${names[1]} and ${names.length - 2} others like this`
+  if (level.length === 2 * n - 1) {
+    console.log(level)
+    return pyramid(n, row + 1)
+  }
+
+  const midpoint = Math.floor((2 * n - 1) / 2)
+  let add;
+  if (midpoint - row <= level.length && midpoint + row >= level.length) {
+    add = '#'
+  } else {
+    add = ' '
+  }
   
-  
+  pyramid(n, row, level + add)
 }
 
 */
