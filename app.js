@@ -1,40 +1,59 @@
 /*
-You probably know the "like" system from Facebook and other pages. People can "like" blog posts, pictures or other items. We want to create the text that should be displayed next to such an item.
-
-Implement the function which takes an array containing the names of people that like an item. It must return the display text as shown in the examples:
+Write a function that accepts a string. Function should capitalize the first letter of each word in the string then return the capitalized string
 */
-function likes(names) {
-  return {
-    0: 'no one likes this',
-    1: `${names[0]} likes this`, 
-    2: `${names[0]} and ${names[1]} like this`, 
-    3: `${names[0]}, ${names[1]} and ${names[2]} like this`, 
-    4: `${names[0]}, ${names[1]} and ${names.length - 2} others like this`, 
-  }[Math.min(4, names.length)]
+
+// str.slice(begin index, end)
+// to uppercase
+
+function capitalize(str) {
+  const words = []
+
+  for (let word of str.split(' ')) {
+    words.push(word[0].toUpperCase() + word.slice(1))
+  }
   
+  return words.join(' ')
 }
 
-console.log(likes(["Alex", "Jacob", "Mark", "Max"]))
+console.log(capitalize('a short sentence')
+
+)
 
 /*
+/ make an empty array 'words'
+/ split input string by spaces to get an array
+/ for each word
+  / uppercase the first letter of the word
+  / join the first letter with the rest of the string
+  / push result into words array
+/ join words, return
 
-function likes(names) {
-  if (names.length === 0) {
-    return "no one likes this"
-  } 
-  if (names.length === 1) {
-    return `${names[0]} likes this`
-  } 
-  if (names.length === 2) {
-    return `${names[0]} and ${names[1]} like this`
-  }
-  if (names.length === 3) {
-    return `${names[0]}, ${names[1]} and ${names[2]} like this`
-  }
+function capitalize(str) {
+  const words = []
 
-  return `${names[0]}, ${names[1]} and ${names.length - 2} others like this`
-  
-  
+  for (let word of str.split(' ')) {
+    words.push(word[0].toUpperCase() + word.slice(1))
+  }
+  return words.join(' ')
 }
 
+/ create an empty string called result
+/ for each character in the string
+  / if the character to the left is a space
+    / capitalize it and add it to the result
+  / else
+    / add it to result
+
+function capitalize(str) {
+  let result = str[0].toUpperCase()
+
+  for (let i = 1; i < str.length; i++) {
+    if (str[i - 1] === ' ') {
+      result += str[i].toUpperCase()
+    } else {
+      result += str[i]
+    }
+  }
+  return result
+}
 */
