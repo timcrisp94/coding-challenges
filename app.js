@@ -1,79 +1,74 @@
 /*
-Write a function that accepts a positive integer n. The function should console log a step shape with N levels using the # character. Make sure the step has spaces onf the right hand side.
+write a function that accepts an integer N and returns an NxN spiral matrix
+
+matrix(2)
+[[1, 2],
+[4, 3]]
+
+matrix(3)
+[[1, 2, 3],
+ [8, 9, 4],
+ [7, 6, 5],
+
+
 */
 
+// for loop i = 1; i < n*n
+  // n array of arrays, length = n
 
 
-function pyramid(n) {
-  const midpoint = Math.floor((2 * n - 1) / 2)
+function matrix(n) {
+  const results = [];
   
-  for (let row = 0; row < n; row++) {
-    let level = ''
-
-    for (let column = 0; column < 2 * n - 1; column++) {
-      if (midpoint - row <= column && midpoint + row >= column) {
-        level += '#'
-      } else {
-        level += ' '
-      }
-    }
-    console.log(level)
+  for (let i = 0; i < n; i++) {
+    results.push([]);
   }
+  
+  let counter = 1;
+  let startColumn = 0;
+  let endColumn = n - 1;
+  let startRow = 0;
+  let endRow = n - 1;
+
+  while (startColumn <= endColumn && startRow <= endRow) {
+      // Top row
+    for (let i = startColumn; i <= endColumn; i++) {
+      results[startRow][i] = counter;
+      counter++;
+    }
+    startRow++;
+  
+      // Right column
+    for (let i = startRow; i <= endRow; i++) {
+      results[i][endColumn] = counter;
+      counter++;
+    }
+    endColumn--;
+  
+    // Bottom row
+    for (let i = endColumn; i >= startColumn; i--) {
+      results[endRow][i] = counter;
+      counter++;
+    }
+    endRow--;
+  
+    // start column
+    for (let i = endRow; i >= startRow; i--) {
+      results[i][startColumn] = counter;
+      counter++;
+    }
+    startColumn++;
+  }
+  
+  return results;
 }
 
-pyramid(3)
+
+console.log(matrix(3))
+
+
 
 /*
-/ iterative solution
 
-/ from 0 to n (iterate through rows)
-  / create an empty string 'level'
-  / from 0 to ?? (columns) --> n * 2 -1
-    / if the column should have a '#' --> column midpoint : Math.floor(n * 2 - 1 / 2) +/- by row
-      / add a '#' to 'level'
-    / else
-      / add a space to level
-  console.log 'stair'
-
-function pyramid(n) {
-  const midpoint = Math.floor((2 * n - 1) / 2)
-  
-  for (let row = 0; row < n; row++) {
-    let level = ''
-
-    for (let column = 0; column < 2 * n - 1; column++) {
-      if (midpoint - row <= column && midpoint + row >= column) {
-        level += '#'
-      } else {
-        level += ' '
-      }
-    }
-    console.log(level)
-  }
-}
-
-/ recursive solution
-
-
-function pyramid(n, row = 0, level = '') {
-  if (row === n) {
-    return
-  }
-
-  if (level.length === 2 * n - 1) {
-    console.log(level)
-    return pyramid(n, row + 1)
-  }
-
-  const midpoint = Math.floor((2 * n - 1) / 2)
-  let add;
-  if (midpoint - row <= level.length && midpoint + row >= level.length) {
-    add = '#'
-  } else {
-    add = ' '
-  }
-  
-  pyramid(n, row, level + add)
-}
 
 */
