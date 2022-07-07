@@ -124,7 +124,7 @@ function uniqueBrute(arr) {
 
   for (let el of arr) {
     if (!practiceSet.has(el)) {
-      practiceSet.add(el)
+      practiceSet.add(el) 
     }
   }
   return practiceSet
