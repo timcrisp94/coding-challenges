@@ -1,51 +1,55 @@
 /*
-You are given an array prices where prices[i] is the price of a given stock on the ith day.
+You are climbing a staircase. It takes n steps to reach the top.
 
-You want to maximize your profit by choosing a single day to buy one stock and choosing a different day in the future to sell that stock.
+Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
 
-Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return 0.
+Input: n = 2
+Output: 2
+Explanation: There are two ways to climb to the top.
+1. 1 step + 1 step
+2. 2 steps
 
-Input: prices = [7,1,5,3,6,4]
-Output: 5
-Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.
-Note that buying on day 2 and selling on day 1 is not allowed because you must buy before you sell.
+Input: n = 3
+Output: 3
+Explanation: There are three ways to climb to the top.
+1. 1 step + 1 step + 1 step
+2. 1 step + 2 steps
+3. 2 steps + 1 step
 */
 
-function maxProfit(prices) {
-  let maxProfit = 0
-  let minPrice = prices[0]
+var climbStairs = function(n) {
+  if (n < 2) return 1
+  if (n === 2) return 2
+  
+  let ways = 0
+  let first = 1
+  let second = 2
 
-  for (let sell = 1; sell < prices.length; sell++) {
-    let sellPrice = prices[sell]
-    let profit = sellPrice - minPrice
-
-    maxProfit = Math.max(maxProfit, profit)
-
-    if (sellPrice < minPrice) minPrice = sellPrice
+  for (let i = 3; i <= n; i++) {
+    ways = first + second
+    first = second
+    second = ways
   }
-  return maxProfit
-}
 
-// complexity : O(n) where n = prices.length
-
-console.log(maxProfit([7, 1, 5, 3, 6, 4]))
-
-
-// brute force
-
-var maxProfitBrute = function(prices) {
-  let maxProfit = 0
-
-  for (let i = 0; i < prices.length; i++) {
-    for (let j = i + 1; j < prices.length; j++) {
-      let profit = prices[j] - prices[i]
-      maxProfit = Math.max(maxProfit, profit)
-    }
-  }
-  return maxProfit
+  return ways
 };
 
-// time complexity : O(n^2) where n is prices.length
-// space complexity : O(1)
 
-console.log(maxProfitBrute([7, 1, 5, 3, 6, 4]))
+
+console.log(climbStairs(5))
+
+
+function fibonacci(n) {
+  if (n <= 0) return []
+
+  let result = [0, 1]
+  
+
+  for (let i = 2; i < n; i++) {
+    result[i] = result[i - 2] + result[i - 1]
+  }
+
+  return result
+}
+
+console.log(fibonacci(5))
