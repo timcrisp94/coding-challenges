@@ -1,44 +1,41 @@
 /*
-You are climbing a staircase. It takes n steps to reach the top.
+You are given an integer array coins representing coins of different denominations and an integer amount representing a total amount of money.
 
-Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
+Return the fewest number of coins that you need to make up that amount. If that amount of money cannot be made up by any combination of the coins, return -1.
 
-Input: n = 2
-Output: 2
-Explanation: There are two ways to climb to the top.
-1. 1 step + 1 step
-2. 2 steps
+You may assume that you have an infinite number of each kind of coin.
 
-Input: n = 3
+Example 1:
+
+Input: coins = [1,2,5], amount = 11
 Output: 3
-Explanation: There are three ways to climb to the top.
-1. 1 step + 1 step + 1 step
-2. 1 step + 2 steps
-3. 2 steps + 1 step
+Explanation: 11 = 5 + 5 + 1
+Example 2:
+
+Input: coins = [2], amount = 3
+Output: -1
+Example 3:
+
+Input: coins = [1], amount = 0
+Output: 0
 */
 
+// brute force
 
-// function climbStairs(n) {
-//   if (n <= 1) return 1
-  
-//   let first = 1
-//   let second = 2
-  
-//   for (let i = 3; i <= n; i++) {
-//     let third = first + second
-//     first = second
-//     second = third
-//   }
-//   return second
-// }
+function coinChange(coins, amount) {
+  const table = new Array(amount + 1).fill(amount + 1)
+  table[0] = 0
 
-function climbStairs(n, memo) {
-  memo = memo || {}
-
-  if (memo[n]) return memo[n]
-  if (n <= 1) return 1
-
-  return memo[n] = climbStairs(n - 2, memo) + climbStairs(n - 1, memo)
+  for (let coin of coins) {
+    for (let i = 0; i < table.length; i++) {
+      if (coin <= i) {
+        let idx = i - coin
+        let potentialAmt = table[idx] + 1
+        table[i] = Math.min(potentialAmt, table[i])
+      }
+    }
+  }
+  return table[table.length - 1] > amount ? -1 : table[table.length - 1]
 }
 
-console.log(climbStairs(5))
+console.log(coinChange([1, 2, 5], 11))
