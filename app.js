@@ -1,41 +1,73 @@
 /*
-You are given an integer array coins representing coins of different denominations and an integer amount representing a total amount of money.
+Let's build our understanding of tabulation by using the grid traveller problem
 
-Return the fewest number of coins that you need to make up that amount. If that amount of money cannot be made up by any combination of the coins, return -1.
+Picture a traveler on a grid, how many ways can they move (x, y)
+gridTraveler(1, 1) -> return one because there's only one way
+gridTraveler(2, 3) -> return three :
+- right, right, down
+- right, down, right
+- down, right, right
 
-You may assume that you have an infinite number of each kind of coin.
+the key is to visualize the problem as a table. The table should be related to the input size. Create a two-dimensional table to illustrate the grid, then initialize the values within the table. After initializing the default values, select a seed value.
 
-Example 1:
+  0  1  2 
+0 0  0  0
 
-Input: coins = [1,2,5], amount = 11
-Output: 3
-Explanation: 11 = 5 + 5 + 1
-Example 2:
+1 0  1->1
+     v  v
+2 0  1  1
 
-Input: coins = [2], amount = 3
-Output: -1
-Example 3:
+  0  1  2
+0 0  0  0
 
-Input: coins = [1], amount = 0
-Output: 0
+1 0  1->1
+       
+2 0  1->2
+
+time and space complexity O(kn)
 */
 
-// brute force
+const gridStart = (k,n) => {
+  const table = Array(k + 1)
+  .fill() // make sure the elements are sub-arrays
+  .map(() => Array(n + 1)) // map over, add indexes
+  console.log(table)
+}
 
-function coinChange(coins, amount) {
-  const table = new Array(amount + 1).fill(amount + 1)
-  table[0] = 0
+console.log(gridStart(2, 3)) // an array with empty 4x3 sub-arrays
 
-  for (let coin of coins) {
-    for (let i = 0; i < table.length; i++) {
-      if (coin <= i) {
-        let idx = i - coin
-        let potentialAmt = table[idx] + 1
-        table[i] = Math.min(potentialAmt, table[i])
+const gridSeed = (k,n) => {
+  const table = Array(k + 1)
+  .fill()
+  .map(() => Array(n + 1).fill(0))
+  console.log(table)
+}
+
+console.log(gridSeed(2, 3)) // same 4 x 3 with zeroes
+
+const gridTraveler= (n, k) => {
+  const table = Array(k + 1)
+  .fill()
+  .map(() => Array(n + 1).fill(0));
+   
+  table[1][1] = 1;
+   
+  for (let i = 0; i <= k; i++) {
+    for (let j = 0; j <= n; j++) {
+      const current=table[i][j];
+      if (j + 1 <= n) { // increment to stay inside border
+        table[i][j + 1] += current; // adds to the right
+      }
+      if (i + 1 <= k) { // increment to stay in border
+        table[i + 1][j] += current; // adds down   
       }
     }
   }
-  return table[table.length - 1] > amount ? -1 : table[table.length - 1]
-}
+  return table [k][n];
+  
+};
 
-console.log(coinChange([1, 2, 5], 11))
+console.log(gridTraveler(2, 3))
+
+// when solving a problem using tabulation, you must first envision it as a table / size the table based on the input, initialize with default values 
+// identify the trivial answer (base case), iterate through the table then fill further parts based on the recent position
