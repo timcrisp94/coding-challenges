@@ -1,45 +1,44 @@
 /*
-Given an integer array nums, return an array answer such that answer[i] is equal to the product of all the elements of nums except nums[i].
 
-The product of any prefix or suffix of nums is guaranteed to fit in a 32-bit integer.
+Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
 
-You must write an algorithm that runs in O(n) time and without using the division operation.
+An input string is valid if:
 
+Open brackets must be closed by the same type of brackets.
+Open brackets must be closed in the correct order.
  
 
 Example 1:
 
-Input: nums = [1,2,3,4]
-Output: [24,12,8,6]
+Input: s = "()"
+Output: true
 Example 2:
 
-Input: nums = [-1,1,0,-3,3]
-Output: [0,0,9,0,0]
+Input: s = "()[]{}"
+Output: true
+Example 3:
+
+Input: s = "(]"
+Output: false
+
 */
 
-var productExceptSelf = function(nums) {
-  let len = nums.length
-  let result = Array(len) // [ , , , ]
-  let left = Array(len + 1)
-  let right = Array(len + 1)
+var isValid = function(s) {
+  if (s.length % 2 !== 0) return false
+  
+  let stack = []
+  const map = new Map([
+    ['(', ')'],
+    ['[', ']'],
+    ['{', '}']
+  ])
 
-  left[0] = 1
-  right[0] = 1
-
-  for (let i = 0; i < len; i++) {
-    left[i + 1] = left[i] * nums[i]   
-  }
-
-  for (let j = 0; j < len; j++) {
-    right[j + 1] = right[j] * nums[len - 1 - j]    
-  }
-
-  for (let k = 0; k < len; k++) {
-    result[k] = left[k] * right[len - k - 1]    
-  }
-
-  return result
-
+  for (let i = 0; i < s.length; i++) {
+    if (map.has(s[i])) {
+      stack.push(map.get(s[i]))
+    } else if (s[i] !== stack.pop()) {
+      return false
+    }
+  } 
+  return stack.length === 0
 };
-
-console.log(productExceptSelf([1, 2, 3, 4]))
