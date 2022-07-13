@@ -1,44 +1,27 @@
 /*
 
-Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+Given an integer array nums, find the contiguous subarray (containing at least one number) which has the largest sum and return its sum.
 
-An input string is valid if:
+A subarray is a contiguous part of an array.
 
-Open brackets must be closed by the same type of brackets.
-Open brackets must be closed in the correct order.
  
 
 Example 1:
 
-Input: s = "()"
-Output: true
+Input: nums = [-2,1,-3,4,-1,2,1,-5,4]
+Output: 6
+Explanation: [4,-1,2,1] has the largest sum = 6.
 Example 2:
 
-Input: s = "()[]{}"
-Output: true
+Input: nums = [1]
+Output: 1
 Example 3:
 
-Input: s = "(]"
-Output: false
+Input: nums = [5,4,-1,7,8]
+Output: 23
 
 */
 
-var isValid = function(s) {
-  if (s.length % 2 !== 0) return false
-  
-  let stack = []
-  const map = new Map([
-    ['(', ')'],
-    ['[', ']'],
-    ['{', '}']
-  ])
-
-  for (let i = 0; i < s.length; i++) {
-    if (map.has(s[i])) {
-      stack.push(map.get(s[i]))
-    } else if (s[i] !== stack.pop()) {
-      return false
-    }
-  } 
-  return stack.length === 0
+var maxSubArray = function(nums) {
+    
 };
