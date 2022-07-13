@@ -1,62 +1,69 @@
 /*
+Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
 
-Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] such that i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.
+You may assume that each input would have exactly one solution, and you may not use the same element twice.
 
-Notice that the solution set must not contain duplicate triplets.
+You can return the answer in any order.
+
+ 
 
 Example 1:
 
-Input: nums = [-1,0,1,2,-1,-4]
-Output: [[-1,-1,2],[-1,0,1]]
-Explanation: 
-nums[0] + nums[1] + nums[1] = (-1) + 0 + 1 = 0.
-nums[1] + nums[2] + nums[4] = 0 + 1 + (-1) = 0.
-nums[0] + nums[3] + nums[4] = (-1) + 2 + (-1) = 0.
-The distinct triplets are [-1,0,1] and [-1,-1,2].
-Notice that the order of the output and the order of the triplets does not matter.
+Input: nums = [2,7,11,15], target = 9
+Output: [0,1]
+Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
 Example 2:
 
-Input: nums = [0,1,1]
-Output: []
-Explanation: The only possible triplet does not sum up to 0.
+Input: nums = [3,2,4], target = 6
+Output: [1,2]
 Example 3:
 
-Input: nums = [0,0,0]
-Output: [[0,0,0]]
-Explanation: The only possible triplet sums up to 0.
+Input: nums = [3,3], target = 6
+Output: [0,1]
 
 */
+// can values be negative?
+// return indces of two nums
 
-var threeSum = function(nums) {
-  nums.sort((a, b) => a - b)
-  const object = {}
-  let result = []
+// brute force
+// var twoSum = function(nums, target) {
+//   for (let i = 0; i < nums.length; i++) {
+//     for (let j = i + 1; j < nums.length; i++) {
+//       if (nums[i] + nums[j] === target) {
+//         return [i, j]
+//       }
+//     }
+//   }
+// };
 
-  for (let i = 0; i < nums.length - 2; i++) {
-    // nums[i] + -nums[i] = 0
-    let target = -nums[i]
-    let left = i + 1
-    let right = nums.length - 1
+// var twoSum = function(nums, target) {
+//   let object = {}
 
-    while (left < right) {
-      let curr = nums[left] + nums[right]
-      if (curr > target) {
-        right--
-      } else if (curr < target) {
-        left++
-      } else {
-        let arr = [nums[i], nums[left], nums[right]]
-        if (object[arr] !== 1) {
-          object[arr] = 1
-          result.push(arr)
-        }
-        left++
-        right--
-      }
+//   for (let i = 0; i < nums.length; i++) {
+//     let cur = nums[i]
+//     // diff = what we're looking for
+//     let diff = target - cur
+
+//     if (object[cur] !== undefined) {
+//       return [object[cur], i]
+//     } else {      
+//       object[diff] = i
+//     }
+//     console.log(object[cur])
+//   }
+// }
+
+var twoSum = function(nums, target) {
+  let map = new Map()
+  for (let i = 0; i < nums.length; i++) {    
+    let diff = target - nums[i]
+    if (map.has(diff)) {
+      return([map.get(diff), i])
     }
-
+    map.set(nums[i], i)    
   }
-    return result
-};
+  console.log(map)
+}  
 
-console.log(threeSum([-1,0,1,2,-1,-4]))
+
+console.log(twoSum([2, 7, 11, 15], 9))
