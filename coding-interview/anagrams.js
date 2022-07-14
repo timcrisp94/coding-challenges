@@ -18,12 +18,9 @@ function cleanString(str) {
 
 
 
-console.log(anagrams('fetch', 'reset'))
-console.log(anagrams('dormitory', 'dirty room'))
 
-/*
 
-/ using a character map
+// using a character map
 
 function anagrams(stringA, stringB) {
   const aCharMap = buildCharMap(stringA)
@@ -50,4 +47,6 @@ function buildCharMap (str) {
   }
   return charMap
 }
-*/
+
+console.log(anagrams('fetch', 'reset'))
+console.log(anagrams('dormitory', 'dirty room'))

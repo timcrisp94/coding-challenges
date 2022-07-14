@@ -20,7 +20,7 @@ Input: coins = [1], amount = 0
 Output: 0
 */
 
-// brute force
+
 
 function coinChange(coins, amount) {
   const table = new Array(amount + 1).fill(amount + 1)
