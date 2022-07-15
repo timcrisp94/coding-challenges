@@ -11,14 +11,14 @@
 // Explanation: There is a cycle in the linked list, where the tail connects to the 1st node (0-indexed).
 
 var hasCycle = function(head) {
-    let fast = head
-    let slow = head
+  let fast = head
+  let slow = head
 
-    while(fast && fast.next) {
-      fast = fast.next.next
-      slow = slow.next
+  while(fast && fast.next) {
+    fast = fast.next.next
+    slow = slow.next
 
-      if (slow === fast) return true
-    }
-  return false
+    if (slow === fast) return true
+  }
+return false
 };
