@@ -18,12 +18,23 @@ Output: 1
 Explanation: The original array was [1,2,3,4,5] rotated 3 times.
 
 */
+
+// binary search
+// set initial values for left and right to first and last numbers of array
+// if input array.length is 1, return number
+// if left val is less than right, the input array is not rotated, return left val
+// binary search for right val less than left
+
 const findMin = function(nums) {
   let left = 0
   let right = nums.length - 1
-
+  
+  if (nums.length === 1) return nums[0]
+  
+  if (nums[left] < nums[right]) return nums[left]
+  
   while (left < right) {
-    const mid = Math.floor((right - left) / 2)
+    const mid = Math.floor((left + right) / 2)
     if (nums[right] >= nums[mid]) {
       right = mid
     } else {
@@ -32,5 +43,4 @@ const findMin = function(nums) {
   }
   return nums[left]
 }
-
-console.log(findMin([3,4,5,1,2]))
+console.log(findMin([1,2,3,4,0]))
