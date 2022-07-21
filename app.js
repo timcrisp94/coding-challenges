@@ -31,7 +31,6 @@ Output: 3
 const numIslands = function(grid) {
   let counter = 0
   const dfs = function(i, j) {
-    // edge case
     if (
       i >= 0 &&
       j >= 0 &&
@@ -39,13 +38,11 @@ const numIslands = function(grid) {
       j < grid[i].length &&
       grid[i][j] === '1'
     ) {
-      // mark element as visited
       grid[i][j] = '0'
-      // visited all surrounding
-      dfs(i + 1, j) //bottom
-      dfs(i, j + 1) //right
-      dfs(i - 1, j) //top
-      dfs(i, j - 1) //left
+      dfs(i - 1, j)
+      dfs(i, j + 1)
+      dfs(i + 1, j)
+      dfs(i, j - 1)
     }
   }
 
@@ -57,12 +54,14 @@ const numIslands = function(grid) {
       }
     }
   }
+
+
   return counter
 }
 
 console.log(numIslands([
-  ["0","0","0","0","0"],
-  ["0","0","0","0","0"],
+  ["1","1","0","0","0"],
+  ["1","1","0","0","0"],
   ["0","0","1","0","0"],
   ["0","0","0","1","1"]
 ]))
