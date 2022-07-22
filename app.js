@@ -1,67 +1,57 @@
 /*
-Given an m x n 2D binary grid grid which represents a map of '1's (land) and '0's (water), return the number of islands.
 
-An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically. You may assume all four edges of the grid are all surrounded by water.
-
-nput: grid = [
-  ["1","1","1","1","0"],
-  ["1","1","0","1","0"],
-  ["1","1","0","0","0"],
-  ["0","0","0","0","0"]
-]
-Output: 1
-Example 2:
-
-Input: grid = [
-  ["1","1","0","0","0"],
-  ["1","1","0","0","0"],
-  ["0","0","1","0","0"],
-  ["0","0","0","1","1"]
-]
-Output: 3
 */
-// find all connected components in the graph
-// edge cases: we need to stay inside the grid
-// - we need to visit each element only once
+// create prerequisite map
+// course : []
 
-// traverse grid
-// if element = 1, call dfs helper function and ++counter
-// change each visited element = 1 to 0
+  // for each course, add prereqs 
 
-const numIslands = function(grid) {
-  let counter = 0
-  const dfs = function(i, j) {
-    if (
-      i >= 0 &&
-      j >= 0 &&
-      i < grid.length &&
-      j < grid[i].length &&
-      grid[i][j] === '1'
-    ) {
-      grid[i][j] = '0'
-      dfs(i - 1, j)
-      dfs(i, j + 1)
-      dfs(i + 1, j)
-      dfs(i, j - 1)
+  // visitSet = new Set()
+  
+  // depthfirst 
+    // if course in visit set return false
+    // if preMap[course] === [] return true
+
+    // add course to visitSet
+    // loop through prereqs of course
+    // for each prereq dfs(prereq)
+    // if !dfs(pre) return false
+    // remove from visitSet
+    // preMap[crs] = [] 
+    // return true
+    
+    // for course in numCourses
+    // if !dfs(crs) return false
+    // return
+  
+  const courseSchedule = function(numCourses, prerequisites) {
+    const visited = new Set()
+    const visiting = new Set()
+
+    const preArray = [...new Array(numCourses)].map(() => [])
+    prerequisites.forEach(([course, prereq]) => {
+      preArray[prereq].push(course)
+    })
+
+    for (let course = 0; course < numCourses; courses++) {
+      if (!dfs(course)) return false
     }
-  }
 
-  for (let i = 0; i < grid.length; i++) {
-    for (let j = 0; j < grid[i].length; j++) {
-      if (grid[i][j] === '1') {
-        counter += 1
-        dfs(i, j)
+    return true
+
+    function dfs(course) {
+      if (visited.has(course)) return true
+      if (visiting.has(course)) return false
+
+      visiting.add(course)
+
+      for (let i = 0; i < preArray[course]; i++) {
+        if (!preArray[course][i]) {
+          return false
+        }
       }
+      visiting.delete(course)
+      visited.add(course)
+      return true
     }
   }
-
-
-  return counter
-}
-
-console.log(numIslands([
-  ["1","1","0","0","0"],
-  ["1","1","0","0","0"],
-  ["0","0","1","0","0"],
-  ["0","0","0","1","1"]
-]))
