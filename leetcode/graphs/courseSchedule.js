@@ -37,8 +37,10 @@ Return true if you can finish all courses. Otherwise, return false.
       prerequisites.forEach(([course, prereq]) => {
         preArray[prereq].push(course)
       })
-  
-      for (let course = 0; course < numCourses; courses++) {
+      
+      console.log(preArray)
+
+      for (let course = 0; course < numCourses; course++) {
         if (!dfs(course)) return false
       }
   
@@ -60,3 +62,5 @@ Return true if you can finish all courses. Otherwise, return false.
         return true
       }
     }
+
+    console.log(courseSchedule(5, [[0,1], [0,2], [1,3], [3,4]]))
