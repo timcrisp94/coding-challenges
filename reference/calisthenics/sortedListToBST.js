@@ -63,3 +63,24 @@ const sortedListToBST = function(head) {
   }
   return helperFunction(head, null)
 }
+
+const sortedListtoBST = function(head) {
+  const helperFunction = function(head, foot) {
+    let fast = head
+    let slow = head
+    let node
+
+    if (head === foot) return null
+
+    while (fast !== foot && fast.next !== foor) {
+      fast = fast.next.next
+      slow = slow.next
+    }
+
+    node = new TreeNode(slow.val)
+    node.left = sortedListtoBST(head, slow)
+    node.right = sortedListtoBST(slow.next, foot)
+    return node
+  }
+  return helperFunction(head, null)
+}
