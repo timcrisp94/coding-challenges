@@ -36,6 +36,7 @@ var characterReplacement = function(s, k) {
 
     if (right - left + 1 - maxCharCount > k) {
       chars[s[left]]--
+      console.log(chars[s[left]])
       left++
     }
     right++
