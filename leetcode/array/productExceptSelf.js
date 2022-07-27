@@ -17,29 +17,66 @@ Input: nums = [-1,1,0,-3,3]
 Output: [0,0,9,0,0]
 */
 
-var productExceptSelf = function(nums) {
-  let len = nums.length
-  let result = Array(len) // [ , , , ]
-  let left = Array(len + 1)
-  let right = Array(len + 1)
+// var productExceptSelf = function(nums) {
+//   let len = nums.length
+//   let result = Array(len) // [ , , , ]
+//   let left = Array(len + 1)
+//   let right = Array(len + 1)
 
-  left[0] = 1
-  right[0] = 1
+//   left[0] = 1
+//   right[0] = 1
 
-  for (let i = 0; i < len; i++) {
-    left[i + 1] = left[i] * nums[i]   
+//   for (let i = 0; i < len; i++) {
+//     left[i + 1] = left[i] * nums[i]   
+//   }
+
+//   for (let j = 0; j < len; j++) {
+//     right[j + 1] = right[j] * nums[len - 1 - j]    
+//   }
+
+//   for (let k = 0; k < len; k++) {
+//     result[k] = left[k] * right[len - k - 1]    
+//   }
+
+//   return result
+
+// };
+
+// const productExceptSelf = function(nums) {
+//   let result = Array(4).fill(1)
+//   let prefix = 1
+
+//   for (let i = 0; i < nums.length; i++) {
+//     result[i] = prefix
+//     prefix *= nums[i]
+//   }
+  
+//   let postfix = 1
+//   for (let j = nums.length - 1; j >= 0; j--) {
+//     result[j] *= postfix
+//     postfix *= nums[j]
+//   }
+//   return result
+// }
+
+const productExceptSelf = function(nums) {
+  let result = Array(nums.length).fill(1)
+  let prefix = 1
+
+  for (let i = 0; i < nums.length; i++) {
+    result[i] = prefix
+    prefix *= nums[i]
+    // console.log(result, prefix)
   }
 
-  for (let j = 0; j < len; j++) {
-    right[j + 1] = right[j] * nums[len - 1 - j]    
+  let postfix = 1
+  for (let j = nums.length - 1; j >= 0; j--) {
+    result[j] *= postfix
+    postfix *= nums[j]
+    console.log(result, postfix)
   }
 
-  for (let k = 0; k < len; k++) {
-    result[k] = left[k] * right[len - k - 1]    
-  }
-
+  
   return result
-
-};
-
+}
 console.log(productExceptSelf([1, 2, 3, 4]))
