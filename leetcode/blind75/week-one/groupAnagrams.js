@@ -18,7 +18,7 @@ Output: [["bat"],["nat","tan"],["ate","eat","tea"]]
 
 const groupAnagrams = function(strs) {
   const hash = {}
-  let result = []
+  const result = []
 
   for (let str of strs) {
     let letters = str.split('').sort().join('')

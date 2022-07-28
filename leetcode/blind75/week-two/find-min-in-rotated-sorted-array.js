@@ -16,46 +16,27 @@ Example 1:
 Input: nums = [3,4,5,1,2]
 Output: 1
 Explanation: The original array was [1,2,3,4,5] rotated 3 times.
-
 */
-// const findMin = function(nums) {
-//   let left = 0
-//   let right = nums.length - 1
 
-//   while (left < right) {
-//     const mid = Math.floor((right - left) / 2)
-//     if (nums[right] >= nums[mid]) {
-//       right = mid
-//     } else {
-//       left = mid + 1
-//     }
-//   }
-//   return nums[left]
-// }
-
-// set initial values for left and right to first and last number of input array
-// if the input array is length 1, return the number
-// if left val is less than right val, input array is not rotated, return left val
-// run binary search
-
-const findMin = function(nums) {
+const findMin = function(nums) { 
   let left = 0
   let right = nums.length - 1
-  
-  // if (nums.length === 1) return nums[0]
-  
-  // if (nums[left] < nums[right]) return nums[left]
-  
-  while (left < right) {
-    const mid = Math.floor((left + right) / 2)
+
+  while (left <= right) {    
+    // if (nums[left] < nums[right]) {
+    //   result = Math.min(result, nums[left])
+    //   break
+    // }
+    let mid = Math.floor(left + right / 2)
     if (nums[right] >= nums[mid]) {
-      right = mid
-    } else {
       left = mid + 1
+    } else {
+      right = mid - 1
     }
   }
   return nums[left]
 }
-console.log(findMin([3,4,5,0,1,2]))
+
+console.log(findMin([3,4,5,1,2]))
 console.log(findMin([2,1]))
 console.log(findMin([3, 1, 2]))
