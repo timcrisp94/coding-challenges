@@ -32,83 +32,86 @@ Output: 3
 // if element = 1, call dfs helper function and ++counter
 // change each visited element = 1 to 0
 
-const numIslands = function(grid) {
-  let counter = 0
-  const dfs = function(i, j) {
-    // edge case
-    if (
-      i >= 0 &&
-      j >= 0 &&
-      i < grid.length &&
-      j < grid[i].length &&
-      grid[i][j] === '1'
-    ) {
-      // mark element as visited
-      grid[i][j] = '0'
-      // visited all surrounding
-      dfs(i + 1, j) //bottom
-      dfs(i, j + 1) //right
-      dfs(i - 1, j) //top
-      dfs(i, j - 1) //left
-    }
-  }
+// const numIslands = function(grid) {
+//   let counter = 0
+//   const dfs = function(i, j) {
+//     // edge case
+//     if (
+//       i >= 0 &&
+//       j >= 0 &&
+//       i < grid.length &&
+//       j < grid[i].length &&
+//       grid[i][j] === '1'
+//     ) {
+//       // mark element as visited
+//       grid[i][j] = '0'
+//       // visited all surrounding
+//       dfs(i + 1, j) //bottom
+//       dfs(i, j + 1) //right
+//       dfs(i - 1, j) //top
+//       dfs(i, j - 1) //left
+//     }
+//   }
 
-  for (let i = 0; i < grid.length; i++) {
-    for (let j = 0; j < grid[i].length; j++) {
-      if (grid[i][j] === '1') {
-        counter += 1
-        dfs(i, j)
-      }
-    }
-  }
-  return counter
-}
+//   for (let i = 0; i < grid.length; i++) {
+//     for (let j = 0; j < grid[i].length; j++) {
+//       if (grid[i][j] === '1') {
+//         counter += 1
+//         dfs(i, j)
+//       }
+//     }
+//   }
+//   return counter
+// }
 
-console.log(numIslands([
-  ["0","0","0","0","0"],
-  ["0","0","0","0","0"],
-  ["0","0","1","0","0"],
-  ["0","0","0","1","1"]
-]))
+// console.log(numIslands([
+//   ["0","0","0","0","0"],
+//   ["0","0","0","0","0"],
+//   ["0","0","1","0","0"],
+//   ["0","0","0","1","1"]
+// ]))
 
 /*
 breadth first solution
+*/
 
-const numIslands = function(grid) {
-  let counter = 0
-  const isIsland = function(i, j) {
+const numIslands = (grid) => {
+  const isIsland = (i, j) =>
     i >= 0 &&
-    j >= 0 &&
     i < grid.length &&
+    j >= 0 &&
     j < grid[i].length &&
-    grid[i][j] === '1'
+    grid[i][j] === '1';
 
-    const bfs = (i, j) => {
-      const queue = [i, j]
+  const bfs = (i, j) => {
+    const queue = [[i, j]];
 
-      while (queue.length) {
-        const [i, j] = queue.shift()
-      }
+    while (queue.length) {
+      const [i, j] = queue.shift();
 
-      grid[i][j] = '0'
+      grid[i][j] = '0';
 
-      if (isIsland(i + 1, j)) queue.push([i + 1, j])
-      if (isIsland(i, j + 1)) queue.push([i, j + 1])
-      if (isIsland(i - 1, j)) queue.push([i - 1, j])
-      if (isIsland(i, j - 1)) queue.push([i, j - 1])
+      if (isIsland(i + 1, j)) queue.push([i + 1, j]);
+      if (isIsland(i, j + 1)) queue.push([i, j + 1]);
+      if (isIsland(i - 1, j)) queue.push([i - 1, j]);
+      if (isIsland(i, j - 1)) queue.push([i, j - 1]);
     }
-  }
+  };
 
-  for (let i = 0; i < grid.length; i++) {
-    for (let j = 0; j < grid.length; j++) {
+  let counter = 0;
+
+  for (let i = 0; i < grid.length; i += 1) {
+    for (let j = 0; j < grid[i].length; j += 1) {
       if (grid[i][j] === '1') {
-        counter++
-        bfs(i, j)
+        counter += 1;
+        bfs(i, j);
       }
     }
   }
-  return counter
-}
+
+  return counter;
+};
+
 
 console.log(numIslands([
   ["0","0","0","0","0"],
@@ -117,4 +120,3 @@ console.log(numIslands([
   ["0","0","0","1","1"]
 ]))
 
-*/

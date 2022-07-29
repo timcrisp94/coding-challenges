@@ -12,22 +12,19 @@ Explanation: Replace the two 'A's with two 'B's or vice versa.
 
 const characterReplacement = function(s, k) {
   const count = {}
-  let left = 0
-  let right = 0
-  let maxCharCount = 0
-
+  let left = 0, right = 0, maxCharCount = 0
+  
   while (right < s.length) {
     count[s[right]] = (count[s[right]] || 0) + 1
     maxCharCount = Math.max(maxCharCount, count[s[right]])
-    console.log(maxCharCount)
-    // length of window - maxCharCount must be less than k
+
     if (right - left + 1 - maxCharCount > k) {
       count[s[left]]--
       left++
     }
     right++
   }
-  return right - left  
+  return right - left
 }
 
 console.log(characterReplacement("AABABBA", 1))
