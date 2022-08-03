@@ -1,38 +1,54 @@
-var minWindow = function(str, t) {
-  let [s, e, result, map, count] = [0,0,"",new Map(),0];
-
-  for (let i = 0; i < t.length; i++) {
-      if (!map.has(t[i])) map.set(t[i], 0);
-      map.set(t[i], map.get(t[i]) + 1)
-  }
-  count = map.size
-
-  while (e < str.length) { // slide right pointer right
-      const c = str[e]
-
-      if (map.has(c)) {
-          map.set(c, map.get(c) - 1)
-          // if (map.get(c) === 0) count--;
-          console.log(map)
+var canFinish = function(numCourses, prerequisites) {
+  const visited = new Set();
+  const visiting = new Set();
+  
+  // Initialize an array of all the courses (i.e. index 0 for course 0, index
+  // 1 for course 1). For each course, populate an array of all the courses
+  // that depend on it
+  const prereqCourseArr = [...new Array(numCourses)].map(() => []);
+  prerequisites.forEach(([course, prereq]) => {
+      prereqCourseArr[prereq].push(course);
+  });
+  
+  console.log(prereqCourseArr)
+  // Do DFS on each course
+  for (let course = 0 ; course < numCourses; course++) {
+      // There is a cycle, this course cannot be finished
+      if (!dfs(course)) {
+         return false;
+      } 
+  };
+  return true;
+  
+  function dfs(course) {
+      // We have seen and verified this course can be finished
+      if (visited.has(course)) {
+          return true;
       }
-
-      while (count === 0) { // slide left pointer right
-          const c = str[s];
-
-          if (result === "" || result.length > (e - s + 1)) {
-              result = str.slice(s, e + 1)
-          }
-
-          if (map.has(c)) {
-              map.set(c, map.get(c) + 1)
-              if (map.get(c) >= 1) count++;
-          }
-          s++;
+      
+      // This is one of the courses we are seeing during the current search
+      // (i.e. there is a cycle)
+      if (visiting.has(course)) {
+          return false;
       }
-      e++;
-  }
-
- return result;
+      
+      // Add the course to courses we are seeing during the current search
+      visiting.add(course);
+      
+      // Iterate through all the other courses that depend on the current
+      // course. For each one, do DFS
+      const coursesDependingOnThis = prereqCourseArr[course];
+      for (let i = 0; i < coursesDependingOnThis.length; i++) {
+          const courseDependingOnThis = coursesDependingOnThis[i];
+          if (!dfs(courseDependingOnThis)) {
+              return false;
+          }
+      }
+      
+      visiting.delete(course);
+      visited.add(course);
+      return true;
+  };
 };
 
-console.log(minWindow("ADOBECODEBANC", "ABC"))
+console.log(canFinish(2, [[1, 0]]))
