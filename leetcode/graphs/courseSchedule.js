@@ -40,27 +40,27 @@ Return true if you can finish all courses. Otherwise, return false.
       
       console.log(preArray)
 
-      for (let course = 0; course < numCourses; course++) {
-        if (!dfs(course)) return false
-      }
+      // for (let course = 0; course < numCourses; course++) {
+      //   if (!dfs(course)) return false
+      // }
   
-      return true
+      // return true
   
-      function dfs(course) {
-        if (visited.has(course)) return true
-        if (visiting.has(course)) return false
+      // function dfs(course) {
+      //   if (visited.has(course)) return true
+      //   if (visiting.has(course)) return false
   
-        visiting.add(course)
+      //   visiting.add(course)
   
-        for (let i = 0; i < preArray[course]; i++) {
-          if (!preArray[course][i]) {
-            return false
-          }
-        }
-        visiting.delete(course)
-        visited.add(course)
-        return true
-      }
+      //   for (let i = 0; i < preArray[course]; i++) {
+      //     if (!preArray[course][i]) {
+      //       return false
+      //     }
+      //   }
+      //   visiting.delete(course)
+      //   visited.add(course)
+      //   return true
+      // }
     }
-
+    console.log(courseSchedule(2, [[0,1]]))
     console.log(courseSchedule(5, [[0,1], [0,2], [1,3], [3,4]]))
