@@ -41,3 +41,5 @@ const eraseOverlapIntervals = function(intervals) {
 }
 
 console.log(eraseOverlapIntervals([[1,2],[2,3],[3,4],[1,3]])) 
+
+// “Greedy is an algorithmic paradigm that builds up a solution piece by piece, always choosing the next piece that offers the most obvious and immediate benefit. Greedy algorithms are used for optimization problems. An optimization problem can be solved using Greedy if the problem has the following property: At every step, we can make a choice that looks best at the moment, and we get the optimal solution of the complete problem”. 
