@@ -1,57 +1,38 @@
-const pacificAtlantic = function(matrix) {
-  if (matrix.length === 0) return []
+var minWindow = function(str, t) {
+  let [s, e, result, map, count] = [0,0,"",new Map(),0];
 
-  const [m,n] = [matrix.length, matrix[0].length]
-  const pacificVisited = new Set()
-  const atlanticVisited = new Set()
-  const directions = [
-    [1,0],
-    [-1,0],
-    [0,1],
-    [0,-1]
-  ]
+  for (let i = 0; i < t.length; i++) {
+      if (!map.has(t[i])) map.set(t[i], 0);
+      map.set(t[i], map.get(t[i]) + 1)
+  }
+  count = map.size
 
-  const intersection = (setA, setB) => {
-    let result = new Set()
-    for (let el of setB) {
-      if (setA.has(el)) {
-        result.add(el)
+  while (e < str.length) { // slide right pointer right
+      const c = str[e]
+
+      if (map.has(c)) {
+          map.set(c, map.get(c) - 1)
+          // if (map.get(c) === 0) count--;
+          console.log(map)
       }
-    }
-    return result
-  }
 
-  const dfs = (i, j, visited) => {
-    const pair = `${i}-${j}`
-    if (visited.has(pair)) return
-    visited.add(pair)
+      while (count === 0) { // slide left pointer right
+          const c = str[s];
 
-    for (const direction of directions) {
-      const [nextI, nextJ] = [i + direction[0], j + direction[1]]
+          if (result === "" || result.length > (e - s + 1)) {
+              result = str.slice(s, e + 1)
+          }
 
-      if (
-        0 <= nextI &&
-        nextI < m &&
-        0 <= nextJ &&
-        nextJ < n &&
-        matrix[nextI][nextJ] >= matrix[i][j]
-      ) {
-        dfs(nextI, nextJ, visited)
+          if (map.has(c)) {
+              map.set(c, map.get(c) + 1)
+              if (map.get(c) >= 1) count++;
+          }
+          s++;
       }
-    }
+      e++;
   }
 
-  for (let row = 0; row < m; row++) {
-    dfs(row, 0, pacificVisited)
-    dfs(row, n - 1, atlanticVisited)
-  }
+ return result;
+};
 
-  for (let col = 0; col < n; col++) {
-    dfs(0, col, pacificVisited)
-    dfs(m - 1, col, atlanticVisited)
-  }
-
-  return [...intersection(pacificVisited, atlanticVisited)].map(pair => pair.split('-').map(Number))
-}
-
-console.log(pacificAtlantic([[1,2,2,3,5],[3,2,3,4,4],[2,4,5,3,1],[6,7,1,4,5],[5,1,1,2,4]]))
+console.log(minWindow("ADOBECODEBANC", "ABC"))
