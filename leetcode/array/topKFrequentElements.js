@@ -22,26 +22,33 @@
 //   return result
 // }
 
-const topKFrequent = function(nums, k) {
-  let hashMap = {}
-  let result = []
-
+var topKFrequent = function(nums, k) {
+  let counts = new Map();
+  let buckets = [];
+  for (let i = 0; i <= nums.length; i++)
+      buckets.push([]);
+  
+  // count frequent of the elements
   for (let num of nums) {
-    hashMap[num] = (hashMap[num] || 0) + 1
+      if (counts.has(num)) {
+          counts.set(num, counts.get(num) + 1);
+      } else {
+          counts.set(num, 1);
+      }
+  } 
+  // put them into buckets by frequent
+  for (let [key, value] of counts) {
+      buckets[value].push(key);
   }
+  // fetch the larget frequest bucket first, until reach k
+  let ans = [];
+  for (let i = buckets.length - 1; i > 0 && ans.length < k; i--) {
+      if (buckets[i] !== null) ans.push(...buckets[i]);
+  }
+  return ans;
+};
 
-  let arr = Object.entries(hashMap)
-
-  arr
-  .sort((a, b) => {
-    return b[1] - a[1]
-  })
-  .slice(0, k)
-  .forEach(element => result.push(+element[0]))
-
-  return result
-}
-
+console.log(topKFrequent([1], 1))
 
 // const topKFrequentHeap = (nums, k) => {
 //   let freqMap = new Map()
