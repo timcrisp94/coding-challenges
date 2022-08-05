@@ -16,7 +16,7 @@ class BinarySearchTree {
       this.root = newNode
       return this
     }
-    const current = this.root
+    let current = this.root
     while (true) {
       if (value === current.value) {
         return undefined
@@ -96,23 +96,6 @@ class BinarySearchTree {
     traverse(this.root)
     return data
   }
-  cloneGraph() {
-    const visited = {}
-    const dfs = (node) => {
-      if (!node) return node
-      if (visited[node.val]) {
-        return visited[node.val]
-      }
-      let copy = new TreeNode(node.val)
-      visited[node.val] = copy
-
-      node.neighbors.forEach(n =>
-        copy.neighbors.push(dfs(n))
-      )
-      return copy
-    }
-    return dfs(node)
-  }
   invert (root) {
     if (!root) return null
     const tree = new TreeNode()
@@ -127,4 +110,11 @@ class BinarySearchTree {
 
 const tree = new BinarySearchTree()
 
-console.log(tree.cloneGraph(4))
+tree.insert(10)
+tree.insert(6)
+tree.insert(15)
+tree.insert(20)
+tree.insert(3)
+tree.insert(8)
+
+console.log(tree)
