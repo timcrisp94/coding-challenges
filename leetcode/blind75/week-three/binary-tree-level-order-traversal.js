@@ -18,6 +18,10 @@ conquer
 combine
 -return visited
 
+divide
+conquer
+combine
+
 */
 
 const levelOrder = function(root) {
