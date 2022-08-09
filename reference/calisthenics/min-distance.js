@@ -78,60 +78,43 @@ combine
  * The function accepts 2D_INTEGER_ARRAY area as parameter.
  */
 
-// function minimumDistance(area) {
-//   if (area.length === 0) return 0
-//   const [i, j] = [area.length, area[0].length]
-//   const visited = {}
-//   const directions = [
-//     [1,0],
-//     [-1,0],
-//     [0, 1],
-//     [0, -1]
-//   ]
 
-//   function traverse(area, i, j) {
-//     let current = [[i][j]]
-
-//     for (let direction of directions) {
-        
-//     }
-    
-//   }
-// }
-
-function minimumDistance(area) {
-  const canTravel = (i, j) =>
+const minimumDistance = function(area) {
+  if (area.length === 0) return null
+  
+  const isPath = (i, j) => 
     i >= 0 && i < area.length &&
     j >= 0 && j < area[0].length &&
     area[i][j] === 1
+  
+  const bfs = (i, j) => {
+    const queue = [[i, j]]
 
-    const bfs = (i, j) => {
-      const queue = [[i,j]]
+    while (queue.length) {
+      const [i, j] = queue.shift()
 
-      while (queue.length) {
-        const [i,j] = queue.shift()
+      area[i][j] = 0
 
-        if (canTravel(i + 1, j)) queue.push(i + 1, j)
-        if (canTravel(i - 1, j)) queue.push(i - 1, j)
-        if (canTravel(i, j + 1)) queue.push(i, j + 1)
-        if (canTravel(i, j - 1)) queue.push(i, j - 1)
+      if (isPath(i + 1, j)) queue.push([i + 1, j])
+      if (isPath(i - 1, j)) queue.push([i - 1, j])
+      if (isPath(i, j + 1)) queue.push([i, j + 1])
+      if (isPath(i, j - 1)) queue.push([i, j - 1])
+    }
+  }
+
+  let counter = 0
+
+  for (let i = 0; i < area.length; i++) {
+    for (let j = 0; j < area[0].length; j++) {
+      if (area[i][j] === 1) {
+        counter += 1
+        bfs(i, j)
+      } else if (area[i][j] === 9) {
+        return counter += 1
       }
     }
-    let counter = 0
-
-    for (let i = 0; i < area.length; i++) {
-      for (let j = 0; j < area[0].length; j++) {
-        if (area[i][j] === 1) {
-          counter++
-          bfs(i, j)
-        } if (area[i][j] === 9) {
-          bfs(i, j)
-          return counter++
-        }
-      }
-    }
-    return counter
+  }
+  return counter
 }
 
-
-console.log(minimumDistance([1,0,0], [1,0,1], [1,9,1]))
+console.log(minimumDistance([[1,0,0], [1,0,1], [1,9,1]]))
