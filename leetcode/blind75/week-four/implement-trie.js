@@ -1,33 +1,37 @@
-class Trie {
+class TrieNode {
   constructor() {
-    this.root = {}
-  }
-  insert(word) {
-    let node = this.root
-    for (let c of word) {
-      if (node[c] === null) node[c] = {}
-      node = node[c]
-    }
-    node.isWord = true
-  }
-  traverse(word) {
-    let node = this.root
-    for (let c of word) {
-      node = node[c]
-      if (node === null) return null
-    }
-    return node
-  }
-  search(word) {
-    const node = this.traverse(word)
-    return node !== null && node.isWord === true
-  }
-  startsWith(prefix) {
-    return this.traverse(prefix) !== null
+    this.children = {}
+    this.isWord = false
   }
 }
 
-let trie = new Trie()
-trie.insert("fart")
+class Trie {
+  constructor() {
+    this.root = new TrieNode()
+  }
+  insert(word, node = this.root) {    
+    for (const char of word) {
+      const child = node.children[char] || new TrieNode()
+      node.children[char] = child
+      node = child
+    }
+    node.isWord = true
+  }  
+  search(word, node = this.root) {
+    for (const char of word) {
+      const child = node.children[char] || null
+      if (!child) return false
+      node = child
+    }
+    return node.isWord
+  }
+  startsWith(prefix, node = this.root) {
+    for (const char of prefix) {
+      const child = node.children[char] || null
+      if (!child) return false
+      node = child
+    }
+    return true
+  }
+}
 
-console.log(trie)
