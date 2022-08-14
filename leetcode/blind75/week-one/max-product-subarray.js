@@ -28,6 +28,38 @@ for let num of nums
 return result  
 */
 
+const maxProductP = function(nums) {
+  // set result = nums[0], first comparator
+  let result = nums[0]
+  // set current max and min variables = 1, comparators
+  let currentMax = 1
+  let currentMin = 1
+
+  // for each num < nums.length
+  for (let num of nums) {
+    // if this num is greater than our current result
+    // (ex. if nums[1] > nums[0])
+    if (result < num) result = num
+    // if num is 0, reset max and min values
+    if (num === 0) {
+      currentMax = 1
+      currentMin = 1
+    }
+    // let temp = currentMax times num
+    let temp = currentMax * num
+    // current max value = the max of (temp or num * currentMin or num)
+    currentMax = Math.max(temp, num * currentMin, num)
+    // current min = the min of (above)
+    currentMin = Math.min(temp, num * currentMin, num)
+    // result = max of (result, currentMax)
+    result = Math.max(result, currentMax)
+  }
+  return result
+}
+
+console.log(maxProductP([2, 3, -2, 4]))
+console.log(maxProductP([-2, 0, -1]))
+
 const maxProduct = function(nums) {
   let result = nums[0]
   let currentMax = 1
