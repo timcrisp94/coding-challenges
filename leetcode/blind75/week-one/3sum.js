@@ -1,42 +1,75 @@
-const threeSum = function(nums) {
-  // sort nums
-  nums.sort((a, b) => a - b)
-  const result = []
+/*
+Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] such that i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.
 
-  // iterate through nums, run helper function on rest of the array
-  for (let i = 0; i < nums.length; i++) {
-    // avoid duplicate - (continue skips iteration)
-    if (nums[i] === nums[i - 1]) continue
-    // target is nums[i] *-1
-    let target = nums[i] * -1
-    // twoSum to find if j + k = target
-    let subResult = twoSum(i + 1, target, nums)
-    // prevent nested arrays
-    result.push(...subResult)
-  }
-  return result
-}
+Notice that the solution set must not contain duplicate triplets.\
+
+Input: nums = [-1,0,1,2,-1,-4]
+Output: [[-1,-1,2],[-1,0,1]]
+Explanation: 
+nums[0] + nums[1] + nums[2] = (-1) + 0 + 1 = 0.
+nums[1] + nums[2] + nums[4] = 0 + 1 + (-1) = 0.
+nums[0] + nums[3] + nums[4] = (-1) + 2 + (-1) = 0.
+The distinct triplets are [-1,0,1] and [-1,-1,2].
+Notice that the order of the output and the order of the triplets does not matter.
+
+function threeSum (nums)
+1. n = nums.length
+2. result = [] or set
+3.k=0
+4.for let m = 0 < n
+  if m + 
+
+*/
+
+/*
+three sum, helper function two sum
+function threeSum (nums)
+-n = nums.length
+-sort nums
+-result array
+-for let i=0;i<n
+  -if nums[i] = nums[i-1] continue
+  -let target = nums[i] * -1
+  -let subresult = twoSum(i + 1, target, nums)
+  result.push(...subresult)
+return result
+*/
+
+/*
+const twosum (j, target, nums)
+-k = nums.length - 1
+-result array
+-while (j < k)
+  -let left = nums[k]
+  -let right = nums[j]
+  if (left + right > target) k--
+  else (l+r < target) j++
+  else (l+r === target)
+    -result.push(target * -1, left, right)
+    / avoid duplicates / 
+    -while j < k && nums[j] === nums[j + 1] j++
+    -while j < k && nums[k] === nums[k - 1] k--
+    j++
+    k--
+return result
+*/
+
 const twoSum = function(j, target, nums) {
-  // two pointers j, k
   let k = nums.length - 1
   let result = []
 
   while (j < k) {
     let leftVal = nums[j]
     let rightVal = nums[k]
-    // if right + left > target, move right down one
+
     if (leftVal + rightVal > target) {
       k--
-      // if r + l < target, move left up one
     } else if (leftVal + rightVal < target) {
       j++
     } else {
-      // if r + l = target, push it into result
       result.push([(target * -1), leftVal, rightVal])
-      // avoid duplicates for j and k
       while (j < k && nums[j] === nums[j + 1]) j++
       while (j < k && nums[k] === nums[k - 1]) k--
-      // increment j and k
       j++
       k--
     }
@@ -44,5 +77,20 @@ const twoSum = function(j, target, nums) {
   return result
 }
 
+const threeSum = function(nums) {
+  nums.sort((a, b) => a - b)
+  const result = []
 
-console.log(threeSum([-1, 0, 1, 2, -1, -4]))
+  for (let i = 0; i < nums.length - 2; i++) {
+    if (nums[i] === nums[i - 1]) continue
+
+    let target = nums[i] * -1
+    let subResult = twoSum(i + 1, target, nums)
+    result.push(...subResult)
+  }
+  return result
+}
+
+
+
+console.log(threeSum([-1,0,1,2,-1,-4]))
