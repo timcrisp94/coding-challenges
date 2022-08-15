@@ -19,58 +19,48 @@ pseudo : O (nlogn)
 -- else new = [min(new[0], cur[1]), max(new[1], cur[1])
 
 */
-
+/*
+function (s,f)
+n=s.length
+A=Array
+k=0
+for m=0 to n
+ if s[m[start]] < f[k[end]]
+ A[start,end]
+return A
+*/ 
 
 
 const insert = function(intervals, newInterval) {
-  if (intervals.length === 0) {
-    return [ newInterval ];
-}
+  let n = intervals.length
+  if (n === 0) {
+    return [ newInterval ]
+  }
 
   const result = []
   let flag = 0
   let i
 
-  for (i = 0; i < intervals.length; i++) {
-    const interval = intervals[i];
-    if (newInterval[0] > interval[1]){
-        result.push(interval);
-    } else if (newInterval[1] < interval[0]){
-        result.push(newInterval);
-        flag = 1;
-        break;
+  for (i = 0; i < n; i++) {
+    const interval = intervals[i]
+    if (newInterval[0] > interval[1]) {
+      result.push(interval)
+    } else if (newInterval[1] < interval[0]) {
+      result.push(newInterval)
+      flag = 1
+      break
     } else {
-        newInterval[0] = Math.min(newInterval[0], interval[0]);
-        newInterval[1] = Math.max(newInterval[1], interval[1]);
+      newInterval[0] = Math.min(interval[0], newInterval[0])
+      newInterval[1] = Math.max(interval[1], newInterval[1])
     }
-}
+  }
+  
   if (flag === 0) {
-    result.push(newInterval);
-    return result;
+    result.push(newInterval)
+    return result
   } else {
-    return result.concat(intervals.splice(i));
+    return result.concat(intervals.splice(i))
   }
 }
 
-
-console.log(insert([1,5], [2,3])) // return [1, 5] on leet
-
-// const insert = function(intervals, newInterval) {
-//   const result = []
-
-//   for (let i = 0; i < intervals.length; i++) {
-//     // if new interval overlaps
-//     if (Math.max(intervals[i][0], newInterval[0]) <= Math.min(intervals[i][1], newInterval[1])) {
-//       newInterval = [Math.min(intervals[i][0], newInterval[0]), Math.max(intervals[i][1], newInterval[1])]
-//       continue
-//     }
-//     // if new interval end less than i start
-//     if (newInterval[1] < intervals[i][0]) {
-//       result.push(newInterval, ...intervals.slice(i))
-//       return result
-//     }
-//     result.push(intervals[i])
-//   }
-//   result.push(newInterval)
-//   return result
-// }
+console.log(insert([[1,3],[6,9]], [2,5]))
