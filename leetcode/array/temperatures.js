@@ -5,7 +5,7 @@
 // Input: temperatures = [73,74,75,71,69,72,76,73]
 // Output: [1,1,4,2,1,1,0,0]
 
-const dailyTemperatures = function(temperatures) {
+const dailyTemperaturesP = function(temperatures) {
   const n = temperatures.length
   if (n === 0) return null
   // let result = A length n, fill with 0's
@@ -23,5 +23,21 @@ const dailyTemperatures = function(temperatures) {
   }
   return result
 };
+
+const dailyTemperatures = function(temperatures) {
+  const n = temperatures.length
+  if (n === 0) return null
+  let result = new Array(n).fill(0)
+  let stack = []
+
+  for (let i = 0; i < n; i++) {
+    while (stack.length && temperatures[stack[stack.length - 1]] < temperatures[i]) {
+      let j = stack.pop()
+      result[j] = i - j
+    }
+    stack.push(i)
+  }
+  return result
+}
 
 console.log(dailyTemperatures([73,74,75,71,69,72,76,73]))
