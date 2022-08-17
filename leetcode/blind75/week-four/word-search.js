@@ -68,6 +68,7 @@ const existP = (board, word) => {
       // if (result) return result
 // return result 
 
+// recursive, best
 const exist = (board, word) => {
   let result = false
   let n = board.length
@@ -128,12 +129,51 @@ const exist2 = (board, word) => {
   return false;
 };
 
-console.log(exist2([
+
+// dfs with helper functions
+
+const outOfBounds = (board, r, c) => 
+r < 0 || r >= board.length || 
+c < 0 || c >= board[0].length;
+
+const checkNeighbors = (board, word, r, c) => {
+    if (!word.length) return true;
+    if (outOfBounds(board, r, c) || board[r][c] !== word[0]) return false;
+    
+    // store values
+    const curChar = board[r][c];
+    const newWord = word.substring(1);
+
+    board[r][c] = 0; // Disable the current character
+    
+    // Check if neighbors are fruitful
+    const results = checkNeighbors(board, newWord, r + 1, c) ||
+        checkNeighbors(board, newWord, r - 1, c) ||
+        checkNeighbors(board, newWord, r, c + 1) ||
+        checkNeighbors(board, newWord, r, c - 1);
+
+    // Enable current character
+    board[r][c] = curChar;
+
+    return results;
+};
+
+
+var existDFS = function(board, word, r, c) {    
+    for (r = 0; r < board.length; r++) {
+        for (c  = 0; c < board[0].length; c++) {
+            if (checkNeighbors(board, word, r, c)) return true;
+        }
+    }
+    return false;
+};
+
+console.log(exist3([
 ["A","B","C","E"],
 ["S","F","C","S"],
 ["A","D","E","E"]], "ABCCED"))
 
-console.log(exist2([
+console.log(exist3([
   ["A","B","C","E"],
   ["S","F","C","S"],
   ["A","D","E","E"]], "ABCB"))
