@@ -18,9 +18,90 @@ words = ["oath","pea","eat","rain"]
  ["i","f","l","v"]], 
 
 Output: ["eat","oath"]
-*/
 
-const findWords = function(board, words) {
+psuedo - backtracking trie
+const findWords = function(board, words)
+  let n = board.length
+  let m = board[0].length
+  const dirs = [directions]
+  let result = []
+
+  build Trie
+    root = hashMap
+    iterate word of words
+      let node = root
+      iterate char of word
+        if no node[c], node[c] = hashMap
+          node = node[c]
+      node.word = w
+    return root
+
+  dfs search (root, x, y)
+    if's : node.word not null, push node.word to result, node.word = null (to print once)
+      out of bounds return
+      node does not have cuurrent char return
+    c = board[x][y]
+    mark as visited: board[x][y] = "#"
+    for (const [dx, dy] of directions)
+      i = x + dx
+      j = y + dy
+      search(node[c], i,  j)
+    reset board[x][y]
+  root = buildTrie()
+  for let i = 0 up to n
+    for let j = 0 up to m
+      search(root, i, j)
+  return result
+*/    
+const findWords = (board, words) => {
+  const n = board.length
+  const m = board[0].length
+  const dirs = [[-1, 0], [0, 1], [1, 0], [0, -1]];
+  let result = [];
+
+  const buildTrie = () => {
+    const root = {};
+    for (const w of words) {
+      let node = root;
+      for (const c of w) {
+        if (!node[c]) node[c] = {};
+        node = node[c];
+      }
+      node.word = w;
+    }
+    return root;
+  };
+
+  const search = (node, x, y) => {
+    if (node.word != null) {
+      result.push(node.word);
+      node.word = null; // make sure only print one time for each word
+    }
+    
+    if (x < 0 || x >= n || y < 0 || y >= m) return;
+    if (node[board[x][y]] == null) return;
+
+    const c = board[x][y];
+    board[x][y] = '#'; // Mark visited
+    for (const [dx, dy] of dirs) {
+      const i = x + dx;
+      const j = y + dy;
+      search(node[c], i, j);
+    }
+    board[x][y] = c; // reset
+  };
+
+  const root = buildTrie();
+  for (let i = 0; i < n; i++) {
+    for (let j = 0; j < m; j++) {
+      search(root, i, j);
+    }
+  }
+  return result;
+};
+
+// using Trie class
+const findWordsTwo = function(board, words) {
   return new Trie(words).searchBoard(board)
 }
 
@@ -102,53 +183,26 @@ console.log(findWords([ ["o","a","a","n"],
 ["oath","pea","eat","rain"]))
 
 
-const findWordsTwo = (board, words) => {
-  const dirs = [[-1, 0], [0, 1], [1, 0], [0, -1]];
-  let res = [];
 
-  const buildTrie = () => {
-    const root = {};
-    for (const w of words) {
-      let node = root;
-      for (const c of w) {
-        if (node[c] == null) node[c] = {};
-        node = node[c];
-      }
-      node.word = w;
-    }
-    return root;
-  };
 
-  const search = (node, x, y) => {
-    if (node.word != null) {
-      res.push(node.word);
-      node.word = null; // make sure only print one time for each word
-    }
-
-    if (x < 0 || x >= board.length || y < 0 || y >= board[0].length) return;
-    if (node[board[x][y]] == null) return;
-
-    const c = board[x][y];
-    board[x][y] = '#'; // Mark visited
-    for (const [dx, dy] of dirs) {
-      const i = x + dx;
-      const j = y + dy;
-      search(node[c], i, j);
-    }
-    board[x][y] = c; // Reset
-  };
-
-  const root = buildTrie();
-  for (let i = 0; i < board.length; i++) {
-    for (let j = 0; j < board[0].length; j++) {
-      search(root, i, j);
-    }
-  }
-  return res;
-};
 
 console.log(findWordsTwo([ ["o","a","a","n"],
 ["e","t","a","e"],
 ["i","h","k","r"],
 ["i","f","l","v"]], 
 ["oath","pea","eat","rain"]))
+
+const buildTrie = (words) => {
+  const root = {}
+  for (const w of words) {
+    let node = root
+    for (let c of w) {
+      if (!node[c]) node[c] = {}
+      node = node[c]
+    }
+    node.word = w   
+  }
+  return root
+}
+
+console.log(buildTrie(["ace", "ape", "app"]))
