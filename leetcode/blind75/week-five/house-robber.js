@@ -38,4 +38,20 @@ const rob = function(nums) {
   return rob2
 }
 
+function robber(nums) {
+    const n = nums.length
+    if (n < 1) return null
+    if (n < 3) return Math.max(...nums)
+    let first = 0
+
+    let second = nums[0]
+    for (let num of nums) {
+      let temp = Math.max(first + num, second)
+      first = second
+      second = temp
+    }
+    return second
+}
+
+console.log(robber([1,2,3,1]))
 console.log(rob([1,2,3,1]))

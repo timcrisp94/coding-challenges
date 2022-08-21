@@ -17,7 +17,7 @@
 
 const rob = function(nums) {
   const n = nums.length
-  if (n === 1) return nums[0]
+  if (n <= 3) return Math.max(...nums)
 
   function robber(start, end) {
     let first = 0
