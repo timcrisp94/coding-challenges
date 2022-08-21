@@ -32,22 +32,20 @@ double digits 10-19, and 20-26 can be taken as one
 
 function numDecodings(s) {
   let n = s.length
-  let dp = {
-      [n]: 1,
-  };
+  let dp = { [n]: 1 };
 
-  for (let i = n - 1; i => 0; i--) {
-      if (s[i] == '0') {
-          dp[i] = 0;
-      } else {
-          dp[i] = dp[i + 1];
-      }
-      if (
-          i + 1 < n &&
-          (s[i] == '1' || (s[i] == '2' && '0123456'.includes(s[i + 1])))
-      ) {
-          dp[i] += dp[i + 2];
-      }
+  for (let i = n - 1; i > -1; i--) {
+    if (s[i] == '0') {
+        dp[i] = 0;
+    } else {
+        dp[i] = dp[i + 1];
+    }
+    if (
+        i + 1 < n &&
+        (s[i] == '1' || (s[i] == '2' && '0123456'.includes(s[i + 1])))
+    ) {
+        dp[i] += dp[i + 2];
+    }
   }
   return dp[0];
 }
