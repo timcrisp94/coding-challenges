@@ -21,7 +21,6 @@ Output: 0
 */
 
 
-
 function coinChange(coins, amount) {
   const table = new Array(amount + 1).fill(amount + 1)
   table[0] = 0
@@ -37,5 +36,6 @@ function coinChange(coins, amount) {
   }
   return table[table.length - 1] > amount ? -1 : table[table.length - 1]
 }
+
 
 console.log(coinChange([1, 2, 5], 11))
