@@ -5,26 +5,23 @@
 // hash map, sliding window
 
 const twoSum = function(nums, target) {
-  const hashMap = new Map()
-  let result = []
+  const n = nums.length
+  const map = {}
 
-  for (let num of nums) {
-    hashMap[num] = (hashMap[nums] || 0) + 1
-  }
+  for (let i = 0; i < n; i++) {
+    const curr = nums[i]
+    const diff = target - curr
 
-  for (let i = 0; i < nums.length; i++) {
-    let current = nums[i]
-    let diff = target - current
-
-    if (hashMap[diff]) {
-      result.push(i, hashMap[diff])
+    if (diff in map) {
+      return [map[diff], i]
     }
-    return result
+    map[curr] = i
   }
+  return null
 }
 
 
-console.log(twoSum([2,7,11,15], 9))
+console.log(twoSum([3,2,4], 6))
 
 /*
 const twoSum = (nums, target) => {
