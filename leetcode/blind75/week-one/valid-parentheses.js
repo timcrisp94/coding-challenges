@@ -18,9 +18,7 @@ function isValid(s) {
   ])
 
   for (let i = 0; i < s.length; i++) {    
-    // if map has s[i]
-    if (map.has(s[i])) {
-      // use map.get to return value associated with key
+    if (map.has(s[i])) {      
       stack.push(map.get(s[i]))
     } else if (s[i] !== stack.pop()) {
       return false
