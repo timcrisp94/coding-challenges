@@ -53,6 +53,51 @@ const twosum (j, target, nums)
     k--
 return result
 */
+var threeSum = function(nums) {
+  const result = [];
+  
+  function twoSum(i, nums) {
+    let left = i + 1;
+    let right = nums.length - 1;
+    
+    while (left < right) {
+      const sum = nums[i] + nums[left] + nums[right];
+
+      if (sum === 0) {
+        result.push([nums[i], nums[left], nums[right]]);
+        while (nums[left] === nums[left + 1]) {
+          // skip over duplicates from left
+          left += 1;
+        }
+        while (nums[right] === nums[right - 1]) {
+          // skip over duplicates from right
+          right -= 1;
+        }
+          // move onto next numbers
+          left += 1;
+          right -= 1;          
+      } else if (sum > 0) {
+        right -= 1;
+      } else {
+        left += 1;
+      }
+    }
+  }
+  
+  // sort incoming array
+  const sortedNums = nums.sort((a, b) => a - b);
+  // skip last two bc we have the two sum helper to go over those
+  for (let i = 0; i < sortedNums.length - 2; i += 1) {
+    // skip over duplicates here as well
+    // we will start at 0 but start checking duplicates once 
+    // we reach index 1 since we are looking behind 
+    if (i === 0 || sortedNums[i - 1] !== sortedNums[i]) {
+      twoSum(i, sortedNums, result);
+    }
+  }
+  
+  return result;
+};
 
 const twoSum = function(j, target, nums) {
   let k = nums.length - 1
