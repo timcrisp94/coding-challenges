@@ -244,7 +244,7 @@ Operation  Result  Same As     Result
 */
 
 var reverseBits = function (n) {
-  let result = 0b0;
+  let result = 0b0;  
   let curr = n;
 
   for (let i = 0; i < 32; i++) {
@@ -260,7 +260,7 @@ var reverseBits = function (n) {
 const countBits = function (n) {
   let output = [0];
   for (let i = 1; i < n + 1; i++) {
-      output.push(output[i >> 1] + (i & 1));
+    output.push(output[i >> 1] + (i & 1));
   }
   return output;
 };
