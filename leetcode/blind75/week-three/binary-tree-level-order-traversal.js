@@ -24,20 +24,20 @@ combine
 
 */
 
-const levelOrder = function(root) {
-  if (!root) return []
+const levelOrder = function (root) {
+  if (!root) return null
   const visited = []
-  const queue = [root]  
+  const queue = [root]
 
   while (queue.length) {
     let len = queue.length
     visited.push(queue.map(node => node.val))
-    
-    while (len--) {
+
+    while (queue--) {
       let node = queue.shift()
       if (node.left) queue.push(node.left)
       if (node.right) queue.push(node.right)
     }
-  }  
+  }
   return visited
 }
