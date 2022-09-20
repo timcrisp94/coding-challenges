@@ -40,8 +40,7 @@ const longestConsecutive = function(nums) {
       max = Math.max(max, count)
     }
   }
-  
-  console.log (map)
+
   return max
 }
 
