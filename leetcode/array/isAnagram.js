@@ -84,5 +84,5 @@ const isAnagram = (s, t) => {
   return true
 
 }
-console.log(isAnagram("anagram", "anagram"))
+console.log(isAnagram("anagram", "anagrram"))
 
