@@ -19,8 +19,31 @@ C can be placed before D (500) and M (1000) to make 400 and 900.
 Given an integer, convert it to a roman numeral.
 */
 
-const romanToInt = (s) => {
-  let value = 0
+// const romanToInt = (s) => {
+//   let value = 0
+//   const symbols = {
+//     M:  1000,
+//     CM: 900,
+//     D:  500,
+//     CD: 400,
+//     C:  100,
+//     XC: 90,
+//     L:  50,
+//     XL: 40,
+//     X:  10,
+//     IX: 9,
+//     V:  5,
+//     IV: 4,
+//     I:  1,
+//   };
+
+//   for (let i = 0; i < s.length; i++) {
+//     symbols[s[i]] < symbols[s[i + 1]] ? value -= symbols[s[i]] : value += symbols[s[i]]
+//   }
+//   return value
+// }
+
+const romanToInt = function(s) {
   const symbols = {
     M:  1000,
     CM: 900,
@@ -37,10 +60,17 @@ const romanToInt = (s) => {
     I:  1,
   };
 
-  for (let i = 0; i < s.length; i++) {
-    symbols[s[i]] < symbols[s[i + 1]] ? value -= symbols[s[i]] : value += symbols[s[i]]
+  let result = 0
+  let cur = 0
+  let prev = 0
+  let n = s.length - 1
+  
+  for ( ; n >= 0; n--) {
+    cur = symbols[s[n]]
+    cur < prev ? result -= cur : result += cur
+    prev = cur
   }
-  return value
+  return result
 }
 
 console.log(romanToInt("IV"))
