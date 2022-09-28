@@ -70,3 +70,27 @@ const generateParentheses = function(n) {
 }
 
 console.log(generateParentheses(3))
+
+const generateParenthesis = function(n) {
+  let ans = []
+  let m = 2 * n
+
+  const dfs = (pos, open, seq) => {
+    if (pos === m) {
+      let res = new Array(m)
+      for (let i = 0; i < m; i++) {
+        res[i] = seq & 1 << i ? "(" : ")"
+      }
+      ans.push(res.join(""))
+      return
+    }
+
+    if (open) dfs(pos+1, open-1, seq)
+    if (m - pos > open) dfs(pos+1, open+1, seq | 1 << pos)
+  }
+
+  dfs(0, 0, 0)
+  return ans
+}
+
+console.log(generateParenthesis(3))
