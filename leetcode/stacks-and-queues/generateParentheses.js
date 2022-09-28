@@ -15,7 +15,7 @@ Output: ["()"]
 // only add a closing parens if close < open
 // valid IIF open == closed == n
 
-const generateParentheses = (n) => dfs(n)
+// const generateParentheses = (n) => dfs(n)
 
 // const dfs = (n, combos = [], open = 0, close = 0, path = []) => {
 //   const isBaseCase = path.length === (n * 2)
@@ -45,3 +45,28 @@ const generateParentheses = (n) => dfs(n)
 //   path.pop()
 // }
 
+const generateParentheses = function(n) {
+  const output = []
+
+  const dfs = (str, open, close) => {
+    // closed parens can not be more than open parens
+    if (open > close) return
+    // base case
+    if (open === 0 && close === 0) {
+      output.push(str)
+      return
+    }
+    // insert open parens and search for the next valid insertion
+    if (open > 0) {
+      dfs(`${str}(`, open - 1, close)
+    }
+    // insert close parens and ''    
+    if (close > 0) {
+      dfs(`${str})`, open, close - 1)
+    }
+  }
+  dfs('', n, n)
+  return output
+}
+
+console.log(generateParentheses(3))
