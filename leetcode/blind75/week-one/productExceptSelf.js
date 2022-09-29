@@ -15,7 +15,7 @@ pre, post = 1
 for let i UPTO n
   result[i] = prefix
   prefix *= nums[i]
-for let j UPTO n - 1
+for let j = n-1 DOWNTO 0
   result[j] *= postfix
   postfix *= nums[j]
 
