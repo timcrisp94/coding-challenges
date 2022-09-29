@@ -26,13 +26,12 @@ sum = 0
 maxSum = -Infinity
 FOR let i = 0 UPTO N
   sum = max(sum + nums[i], nums[i])
-  max = (max, sum)
+  maxSum = max(maxSum, sum)
 return maxSum
 
 */
 
 // greedy
-
 // function maxSubArray(nums) {
 //   let maxSum = Number.MIN_SAFE_INTEGER
 //   let sum = 0
@@ -44,7 +43,7 @@ return maxSum
 //   return maxSum
 // }
 
-dynamic greedy
+// dynamic greedy
 const maxSubArray = (nums) => {
   const n = nums.length
   for (let i = 1; i < n; i++) {
