@@ -53,3 +53,28 @@ var twoSum = function(nums, target) {
 };
 
 console.log(twoSum([2, 7, 11, 15], 9))
+
+// time complexity : O(N) - length of input array
+// space : O(1) - no new data structures
+
+
+// SLIGHTLY OPTIMIZED TWO-POINTER SOLUTION
+
+const twoSumII = function(nums, target) {
+  const n = nums.length
+  let p1 = 0
+  let p2 = n -1
+
+  while (p1 < p2) {
+    if (nums[p1] + nums[p2] === target) {
+      return [p1+1, p2+1]
+    } else if (nums[p1] + nums[p2] < target) {
+      p1 += 1
+    } else p2 -= 1    
+  }
+}
+
+console.log(twoSumII([2, 7, 11, 15], 9))
+
+// this solution is faster by not using a sum variable
+// though the sum variable makes it easier to read
