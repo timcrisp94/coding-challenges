@@ -1,30 +1,50 @@
 /*
+49. GROUP ANAGRAMS
+
 Given an array of strings strs, group the anagrams together. You can return the answer in any order.
 
 example
 Input: strs = ["eat","tea","tan","ate","nat","bat"]
 Output: [["bat"],["nat","tan"],["ate","eat","tea"]]
 
-pseudo
-group anagrams function(strings)
-/ n = strings.length
-/ store values (key = hash[letters] : values = [values]) 
-const hash = {}
-/ return variable results, array of arrays
-result = array of arrays
-/ for each string < n (O(n))
-for let s of strings
-  / var letters = s letters split, sort, join (O(m))
-  let letters = s.split('').sort().join('')
-  / add letters to hash[letters] or add hash[letters] and set an empty array
-  / add s to hash[letters] array (letters: [s, s, s])
-/ for each value in hash
-for let value in hash
+- pseudo - 
+hash = {} (store values)
+result = []
+FOR let string of strings
+  let letters = s[sorted letters]
+  add letters to hash[letters] or set hash[letters] and []
+  add string to hash[letters] []
+FOR let value in hash
   result.push(hash[value])
 return result
+
 */
 
-const groupAnagramsP = function(strings) {
+
+const groupAnagrams = function(strings) {
+  const hash = {}
+  const result = []
+
+  for (let s of strings) {
+    let letters = s.split('').sort().join('')
+    hash[letters] = hash[letters] || []
+    hash[letters].push(s) 
+  }
+
+  for (let value in hash) {
+    result.push(hash[value])
+  }
+  return result
+}
+
+
+console.log(groupAnagrams(["eat","tea","tan","ate","nat","bat"]))
+
+// time : o(n)
+
+// solution with notes
+
+const groupAnagramsNotes = function(strings) {
   // store values in hash (key,value = unique letters : [anagram strings])
   const hash = {}
   // result variable array 
@@ -48,24 +68,8 @@ const groupAnagramsP = function(strings) {
 
 }
 
-console.log(groupAnagramsP(["eat","tea","tan","ate","nat","bat"]))
+console.log(groupAnagramsNotes(["eat","tea","tan","ate","nat","bat"]))
 
+/*
 
-const groupAnagrams = function(strings) {
-  const hash = {}
-  const result = []
-
-  for (let s of strings) {
-    let letters = s.split('').sort().join('')
-    hash[letters] = hash[letters] || []
-    hash[letters].push(s) 
-  }
-
-  for (let value in hash) {
-    result.push(hash[value])
-  }
-  return result
-}
-
-
-console.log(groupAnagrams(["eat","tea","tan","ate","nat","bat"]))
+*/
