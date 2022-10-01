@@ -1,24 +1,29 @@
 /*
-You are given an array prices where prices[i] is the price of a given stock on the ith day.
+121. BEST TIME TO BUY AND SELL STOCK
 
-You want to maximize your profit by choosing a single day to buy one stock and choosing a different day in the future to sell that stock.
+You are given an array prices where 
+prices[i] is the price of a given stock on the ith day.
 
-Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return 0. 
+You want to maximize your profit by choosing a single day to buy one stock 
+and choosing a different day in the future to sell that stock.
+
+Return the maximum profit you can achieve from this transaction. 
+If you cannot achieve any profit, return 0. 
 
 Example 1:
 
 Input: prices = [7,1,5,3,6,4]
 Output: 5
-*/
 
-// pseudo
-// kadane's - max sum
-// N = prices.length
-// cur, max = 0
-// FOR i = 1 UPTO N
-  // cur = max(0, prices[i] - p[i-1])
-  // max = max(cur,max)
-// return max
+- pseudo - 
+* sliding window, kadane's algo
+n = prices.length
+cur, max = 0
+FOR i = 1 UPTO n
+  cur = max(0, prices[i] - prices[i-1])
+  max = max(cur, max)
+return max
+*/
 
 const maxProfit = (prices) => {
   let n = prices.length
