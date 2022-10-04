@@ -11,28 +11,17 @@ Output: [5,4,3,2,1]
 in:  (1)->(2)->(3)->(4)->(5)
 out: (5)->(4)->(3)->(2)->(1)
 
-
-
 - pseudo -
-let cur = head
-let prev = null
+let [prev,cur] = [null,head]
 WHILE cur
-  let hold = cur.next
-  cur.next = prev
-  prev = cur
-  cur = hold
-return prev
+  [cur.next, prev, cur] = [prev, cur, cur.next]
+return prec
 */
 
 const reverseList = function(head) {
-  let curr = head
-  let prev = null
-
-  while (curr) {
-    let holdNext = curr.next
-    curr.next = prev
-    prev = curr
-    curr = holdNext
+  let [prev, cur] = [null, head]
+  while(cur) {
+    [cur.next, prev, cur] = [prev, cur, cur.next]
   }
   return prev
 }
