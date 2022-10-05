@@ -23,14 +23,14 @@ return prev
 */
 
 const reverseList = function(head) {
-  let curr = head
+  let cur = head
   let prev = null
 
-  while (curr) {
-    let holdNext = curr.next
-    curr.next = prev
-    prev = curr
-    curr = holdNext
+  while (cur) {
+    let temp = cur.next
+    cur.next = prev
+    prev = cur
+    cur = temp
   }
   return prev
 }
