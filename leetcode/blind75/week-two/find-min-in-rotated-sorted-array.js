@@ -15,13 +15,32 @@ Example 1:
 Input: nums = [3,4,5,1,2]
 Output: 1
 Explanation: The original array was [1,2,3,4,5] rotated 3 times.
+
+- PSEUDO - 
+n = nums.length
+let left, right = 0, n - 1
+WHILE left < right
+  mid = left + right / 2
+  guess = nums[mid]
+  leftNum, rightNum = nums[left], nums[right]
+
+  isTarget = leftNum < rightNum
+  IF isTarget return leftNum
+
+  greaterThanTarget = leftNum <= guess
+  IF greaterThanTarget left = mid + 1
+
+  lessThanTarget = guess < leftNum
+  IF lessThanTarget right = mid
+
+return nums[left]
+
 */
 
 const findMin = function(nums) { 
   const n = nums.length
   let left = 0
   let right = n - 1
-  let result = nums[0]
 
   while (left < right) {    
     const mid = (left + right) >> 1
