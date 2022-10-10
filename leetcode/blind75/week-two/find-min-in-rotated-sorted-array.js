@@ -61,3 +61,12 @@ const findMin = function(nums) {
 
 console.log(findMin([3,4,5,1,2]))
 console.log(findMin([2,1]))
+
+// ACTUAL FASTER SOLUTION THAT FEELS LIKE CHEATING
+
+const findMinFaster = (nums) => {
+  return Math.min(...nums)
+}
+
+console.log(findMinFaster([3,4,5,1,2]))
+console.log(findMinFaster([2,1]))
