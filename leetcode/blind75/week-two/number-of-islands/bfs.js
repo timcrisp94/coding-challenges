@@ -1,4 +1,5 @@
-/*
+/* 200/18. NUMBER OF ISLANDS
+
 Given an m x n 2D binary grid grid which represents a map of '1's (land) and '0's (water), return the number of islands.
 
 An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically. You may assume all four edges of the grid are all surrounded by water.
@@ -10,42 +11,60 @@ ex : Input: grid = [
   ["0","0","0","0","0"]
 ]
 Output: 1
+
+- pseudo -
+function numIslands(grid)
+const n = grid.length
+const water = '0'
+const land = '1'
+const directions = [[1,0], [-1,0], [0,1], [0,-1]]
+  
+
 */
 
+function numIslands(grid) {
+  const n = grid.length
+  const water = '0'
+  const land = '1'
+  const directions = [
+    [0, 1],
+    [1, 0],
+    [0, -1],
+    [-1, 0],
+  ]
 
-const numIslands = function(grid) {
-  const isIsland = (i, j) =>
-    i >= 0 && i < grid.length &&
-    j >= 0 && j < grid[i].length &&
-    grid[i][j] === '1'
-
-  const bfs = (i, j) => {
-    const queue = [[i, j]]
+  function bfs(grid, i, j) {
+    let queue = [[i, j]]
+    grid[i][j] = water
 
     while (queue.length) {
-      const [i, j] = queue.shift()
+      for (let i = 0; i < queue.length; i++) {
+        let [row, col] = queue.pop()
 
-      grid[i][j] = '0'
+        for (let [x, y] of directions) {
+          let iRow = row + x
+          let iCol = col + y
 
-      if (isIsland(i + 1, j)) queue.push([i + 1, j])
-      if (isIsland(i - 1, j)) queue.push([i - 1, j])
-      if (isIsland(i, j + 1)) queue.push([i, j + 1])
-      if (isIsland(i, j - 1)) queue.push([i, j - 1])
-    }
-  }
-  
-  let counter = 0
+          if (iRow < 0 || iRow >= n || iCol < 0 || iCol > grid[0].length || grid[iRow][iCol] !== land) continue
 
-  for (let i = 0; i < grid.length; i++) {
-    for (let j = 0; j < grid[i].length; j++) {
-      if (grid[i][j] === '1') {
-        counter++
-        bfs(i, j)
+          grid[iRow][iCol] = water
+          queue.unshift([iRow, iCol])
+        }
       }
     }
   }
-  return counter
+  let count = 0
+  for (let r = 0; r < n; r++) {
+    for (let c = 0; c < grid[0].length; c++) {
+      if (grid[r][c] === land) {
+        count += 1
+        bfs(grid, r, c)
+      }
+    }
+  }
+  return count
 }
+
 
 console.log(numIslands([
   ["1","1","1","1","0"],
