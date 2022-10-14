@@ -1,26 +1,28 @@
-// const removeNthNodeFromEnd = function(head, n) {
-//   let dummy = new ListNode(-Infinity)
-//   dummy.next = head
-//   let resultHead = dummy  
-//   let tail = head
+/* 19/19. REMOVE NTH NODE FROM END OF LIST
 
-//   while (n > 0) {
-//     tail = tail.next
-//     n--
-//   }
+Given the head of a linked list, remove the nth node from the end of the list and return its head.
 
-//   let removedNode = head
-//   let prev = dummy
+Example 1:
+Input: head = [1,2,3,4,5], n = 2
+Output: [1,2,3,5]
 
-//   while (tail) {
-//     tail = tail.next
-//     removedNode = removedNode.next
-//     prev = prev.next
-//   }
-
-//   prev.next = removedNode.next
-//   return resultHead.next
-// }
+- pseudo -
+let dummy = new Node(-Infinity)
+dummy.next = head
+let prev = dummy
+let result = dummy
+let left = head
+let right = head
+WHILE n > 0
+  right = right.next
+  n -= 1
+WHILE right
+  left = left.next
+  right = right.next
+  prev = prev.next
+prev.next = left.next
+return result = result.next
+*/
 
 const removeNthFromEnd = function(head, n) {
   let dummy = new Node(-Infinity)
