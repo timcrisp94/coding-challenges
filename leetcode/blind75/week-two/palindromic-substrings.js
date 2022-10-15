@@ -1,5 +1,42 @@
-/*
+/* 647/29. PALINDROMIC SUBSTRINGS
+
 given a string s, return the number of palindromic substrings in it
+
+-palindrome
+-substring
+
+example 1:
+input: s = "abc"
+output: 3
+"a", "b", "c"
+
+- pseudo - 
+function countSubstrings(s)
+  const n = s.length
+  let result = 0
+  FOR let i upto n
+    let leftOdd = i
+    let rightOdd = i
+    result += countPali(s, leftOdd, rightOdd)
+    "" (leftEven)
+    let rightEven = i + 1
+    "" (countPali(even))
+  return result
+function countPali(s, left, right)
+  const n = s.length
+  let result = 0
+  while (
+    left >= 0 && 
+    right < n 
+    && s[left] === s[right]
+  ) {
+    left--
+    right++
+    result++
+  }
+  return result
+}
+
 */
 
 const countSubstrings = function(s) {
