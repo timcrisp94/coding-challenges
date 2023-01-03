@@ -18,14 +18,12 @@ FOR let i UPTO n
 */
 
 function miniMaxSum(arr) {
-    const n = arr.length
-    let sum = 0
-    let max = -Infinity
-    
-    for (let i = 0; i < n; i++) {
-        
-    }
-    
+    let sum = arr.reduce((a,b) => a+b)
+
+    const min = sum - Math.max(...arr)
+    const max = sum - Math.min(...arr)
+
+    console.log(min + " " + max)
 }
 
 console.log(miniMaxSum([1,3,5,7,9]))
