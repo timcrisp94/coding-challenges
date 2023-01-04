@@ -12,22 +12,36 @@ ELSE
   ELSE replace w/ 12 + value
 */
 
+// function timeConversion(s) {
+//     let timeArray = s.split(":")
+//     const time = {
+//         hours: timeArray[0],
+//         minutes: timeArray[1],
+//         seconds: timeArray[2].slice(0,2),
+//         modifier: timeArray[2].slice(2,4)
+//     }
+    
+//     if (time.modifier === "PM" && parseInt(time.hours) !== 12) {
+//         time.hours = String(parseInt(time.hours) + 12)
+//     } else if (time.modifier === "AM" && parseInt(time.hours) === 12) {
+//         time.hours = "00"
+//     }
+//      return `${time.hours}:${time.minutes}:${time.seconds}`
+    
+// }
+
 function timeConversion(s) {
-    let timeArray = s.split(":")
-    const time = {
-        hours: timeArray[0],
-        minutes: timeArray[1],
-        seconds: timeArray[2].slice(0,2),
-        modifier: timeArray[2].slice(2,4)
+    let mod = s.slice(-2)
+    let hour = s.slice(0,2)
+    let minSec = s.slice(2,8)
+
+    if (mod === "PM" && hour !== "12") {
+        hour = String(parseInt(hour) + 12)
+    } else if (mod === "AM" && hour === "12") {
+        hour = "00"
     }
-    
-    if (time.modifier === "PM" && parseInt(time.hours) !== 12) {
-        time.hours = String(parseInt(time.hours) + 12)
-    } else if (time.modifier === "AM" && parseInt(time.hours) === 12) {
-        time.hours = "00"
-    }
-     return `${time.hours}:${time.minutes}:${time.seconds}`
-    
+
+    return `${hour}${minSec}`
 }
 
 console.log(timeConversion("12:01:00AM"))
