@@ -20,22 +20,19 @@ return result
 
 */
 
-
-const groupAnagrams = function(strings) {
+groupAnagrams = function(strings) {
   const hash = {}
-  const result = []
+  let result = []
 
-  for (let s of strings) {
-    let letters = s.split('').sort().join('')
-    hash[letters] = hash[letters] || []
-    hash[letters].push(s) 
-  }
-
-  for (let value in hash) {
-    result.push(hash[value])
-  }
-  return result
+  for (let string of strings) {
+    let splitString = string.split('').sort().join() 
+    hash[splitString] = (hash[splitString] || [])
+    hash[splitString].push(string)
+  }    
+  
+  return Object.values(hash)
 }
+
 
 
 console.log(groupAnagrams(["eat","tea","tan","ate","nat","bat"]))
