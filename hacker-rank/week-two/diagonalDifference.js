@@ -62,3 +62,24 @@ function countingValleys(steps, path) {
 console.log(countingValleys(8, "UDDDUDUU"))
 console.log(countingValleys(8, "DDUUUUDD"))
 console.log(countingValleys(12, "DDUUDDUDUUUD"))
+
+function marsExploration(s) {
+    let count = 0
+    let array = s.split('')
+    const n = array.length
+    let messageArray = []
+    
+    for (let i = 0; i < n; i+=3) {
+        messageArray.push(array.slice(i, i + 3))
+    }
+
+    for (let m of messageArray) {
+        if (m[0] !== "S") count += 1
+        if (m[1] !== "O") count += 1
+        if (m[2] !== "S") count += 1
+    }
+    
+    return count
+}
+
+console.log(marsExploration("SOSOOSOSOSOSOSSOSOSOSOSOSOS"))
