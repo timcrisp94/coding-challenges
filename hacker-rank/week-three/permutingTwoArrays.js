@@ -18,14 +18,17 @@
 function twoArrays(k, A, B) {
     const n = A.length
     A.sort((a,b) => a-b)
-    B.reverse()
+    B.sort((a,b) => b-a)
+
+    let result = "YES"
 
     for (let i = 0; i < n; i++) {
         if (A[i] + B[i] < k) {
-            return "NO"
+            result = "NO"
+            break
         }    
     }
-    return "YES"
+    return result
 }
 
 console.log(twoArrays(10, [2,1,3], [7,8,9]))
