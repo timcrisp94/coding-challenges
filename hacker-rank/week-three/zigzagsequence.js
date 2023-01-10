@@ -7,4 +7,3 @@ function findZigZagSequence(arr) {
     console.log(result.join(' '))
 }
 
-console.log(findZigZagSequence([2,3,5,1,4]))
