@@ -34,20 +34,9 @@ function twoArrays(k, A, B) {
 // console.log(twoArrays(10, [2,1,3], [7,8,9]))
 // console.log(twoArrays(5, [1,2,2,1], [3,3,3,4]))
 
-const checkInclusion = function(s1, s2) {
-    const sortedOne = s1.split('').sort()
-    const reverseOne = s1.split('').reverse()
-    const sortedTwo = s2.split('')
-    const n = sortedTwo.length
-    let result = false
-
-    for (let i = 0; i < n; i++) {
-        for (let j = 1; j < sortedOne.length; j++) {
-            if (sortedOne)
-        }
-    }
-    return result
-}
+var checkInclusion = function (s1, s2) {
+    
+};
 
 console.log(checkInclusion("ab", "eidbaooo"))
 console.log(checkInclusion("ab", "eidboaoo"))
