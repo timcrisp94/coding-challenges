@@ -41,25 +41,43 @@ Output: "https://leetcode.com/problems/design-tinyurl"
 
 // const decode = shortUrl => codeDB.get(shortUrl)
 
-let codeDB = new Map()
-let urlDB = new Map()
-const chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+// let codeDB = new Map()
+// let urlDB = new Map()
+// const chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
 
-const getCode = () => {
-  let code = new Array(6).fill().map(_ => chars.charAt(~~(Math.random() * 62)))
-  return "http://tinyurl.com/" + code.join("")
+// const getCode = () => {
+//   let code = new Array(6).fill().map(_ => chars.charAt(~~(Math.random() * 62)))
+//   return "http://tinyurl.com/" + code.join("")
+// }
+
+// const encode = longUrl => {
+//   if (urlDB.has(longUrl)) return urlDB.get(longUrl)
+//   let code = getCode()
+//   while (codeDB.has(code)) code = getCode()
+//   codeDB.set(code, longUrl)
+//   urlDB.set(longUrl, code)
+//   return code
+// }
+
+// const decode = shortUrl => codeDB.get(shortUrl)
+
+let encodeMap = new Map()
+let decodeMap = new Map()
+const base = 'http://tinyurl.com/'
+
+const encode = (longUrl) => {
+  let shortUrl = ''
+  if (!encodeMap.has(longUrl)) {
+    shortUrl = base + encodeMap.size + 1
+    encodeMap.set(longUrl, shortUrl)
+    decodeMap.set(shortUrl, longUrl)
+  }
+  return shortUrl || encodeMap.get(longUrl)
 }
 
-const encode = longUrl => {
-  if (urlDB.has(longUrl)) return urlDB.get(longUrl)
-  let code = getCode()
-  while (codeDB.has(code)) code = getCode()
-  codeDB.set(code, longUrl)
-  urlDB.set(longUrl, code)
-  return code
+const decode = (shortUrl) => {
+  return decodeMap.get(shortUrl)
 }
-
-const decode = shortUrl => codeDB.get(shortUrl)
 
 console.log(encode("https://leetcode.com/problems/design-tinyurl"))
 console.log(decode(encode("https://leetcode.com/problems/design-tinyurl"))) 
