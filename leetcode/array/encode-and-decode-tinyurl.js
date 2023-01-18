@@ -62,4 +62,4 @@ const encode = longUrl => {
 const decode = shortUrl => codeDB.get(shortUrl)
 
 console.log(encode("https://leetcode.com/problems/design-tinyurl"))
-console.log(decode(encode("https://leetcode.com/problems/design-tinyurl")))
+console.log(decode(encode("https://leetcode.com/problems/design-tinyurl"))) 
