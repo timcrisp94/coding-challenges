@@ -10,37 +10,21 @@ Output: 4
 Explanation: The longest consecutive elements sequence is [1, 2, 3, 4]. Therefore its length is 4.
 
 */
+const longestConsecutive = (nums) => {
+  let set = new Set(nums)
+  let max = 0
 
-const longestConsecutive = function(nums) {
-  let map = new Map()
+  for (let num of set) {
+    if (set.has(num-1)) continue
+    let cur = 1
+    let prev = num
 
-  for (let num of nums) {
-    map.set(num, 1)    
-  }
-
-  console.log(map)
-  // Map(6) { 100 => 1, 4 => 1, 200 => 1, 1 => 1, 3 => 1, 2 => 1 }
-  
-  for (let i in nums) {
-    if (map.has(nums[i] - 1)) {
-      map.set(nums[i], 0)
+    while (set.has(prev+1)) {
+      cur += 1
+      prev = prev + 1
     }
+    max = Math.max(cur, max)
   }
-
-  // console.log(map)
-  // Map(6) { 100 => 1, 4 => 0, 200 => 1, 1 => 1, 3 => 0, 2 => 0 }
-  
-  let max = 1
-  for (let el of nums) {
-    if (map.get(el) == 1) {
-      let count = 1
-      while (map.has(el + count)) {
-        count += 1
-      }
-      max = Math.max(max, count)
-    }
-  }
-
   return max
 }
 
