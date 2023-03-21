@@ -19,23 +19,22 @@ Input: nums = [4,5,6,7,0,1,2], target = 0
 Output: 4
 
 -PSEUDO-
-left=0
-right=n-1
-WHILE left <= right
-    mid = (left + right) / 2
-    IF target === nums[mid]
+l=0
+r=n-1
+WHILE l <= r
+    mid = (l + r) / 2
+    IF t === nums[mid]
         return mid
-    
     # left sorted portion
-    IF nums[left] <= nums[mid]
-        IF target > nums[mid] OR target < nums[left]
-            left = mid + 1
-        ELSE right = mid - 1
+    IF nums[l] <= nums[mid]
+        IF t > nums[mid] OR t < nums[l]
+            l = mid + 1
+        ELSE r = mid - 1
     # right sorted portion
     ELSE 
-        IF target < nums[mid] OR target > nums[right]
-            right = mid - 1
-        ELSE left = mid + 1
+        IF t < nums[mid] OR t > nums[r]
+            r = mid - 1
+        ELSE l = mid + 1
 return -1
 */
 
